@@ -1,0 +1,1176 @@
+{
+  message: '👥 Processing user followed event: undefined -> undefined',
+  level: 'info',
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v22.14.0',
+  pid: 14584,
+  timestamp: '2026-01-05 22:21:53.980'
+}
+{
+  message: '📤 Sending notification 64c67408-dbed-4ce5-a0e2-02cd8f20c7fb to user undefined',
+  level: 'info',
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v22.14.0',
+  pid: 14584,
+  timestamp: '2026-01-05 22:21:54.024'
+}
+{
+  message: '👥 Processing user followed event: undefined -> undefined',
+  level: 'info',
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v22.14.0',
+  pid: 24312,
+  timestamp: '2026-01-05 22:21:55.101'
+}
+{
+  message: '📤 Sending notification 0a590470-b682-4f05-acee-a08c2b7214c3 to user undefined',
+  level: 'info',
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v22.14.0',
+  pid: 24312,
+  timestamp: '2026-01-05 22:21:55.158'
+}
+{
+  message: '👥 Processing user followed event: undefined -> undefined',
+  level: 'info',
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v22.14.0',
+  pid: 24312,
+  timestamp: '2026-01-05 22:22:00.122'
+}
+{
+  message: '📤 Sending notification fe3d7edc-ab28-4f20-a452-a53b6f568fcb to user undefined',
+  level: 'info',
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v22.14.0',
+  pid: 24312,
+  timestamp: '2026-01-05 22:22:00.126'
+}
+{
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v22.14.0',
+  pid: 14584,
+  level: 'error',
+  message: '❌ Error sending notification 64c67408-dbed-4ce5-a0e2-02cd8f20c7fb: Operation `user_preferences.findOne()` buffering timed out after 10000ms',
+  stack: 'MongooseError: Operation `user_preferences.findOne()` buffering timed out after 10000ms\n' +
+    '    at Timeout.<anonymous> (C:\\Users\\motis\\Downloads\\Notifications\\node_modules\\mongoose\\lib\\drivers\\node-mongodb-native\\collection.js:187:23)\n' +
+    '    at listOnTimeout (node:internal/timers:594:17)\n' +
+    '    at processTimers (node:internal/timers:529:7)',
+  timestamp: '2026-01-05 22:22:04.057'
+}
+{
+  message: '👥 Processing user followed event: undefined -> undefined',
+  level: 'info',
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v22.14.0',
+  pid: 14584,
+  timestamp: '2026-01-05 22:22:04.061'
+}
+{
+  message: '📤 Sending notification bf776a7e-58ca-41a4-a0da-f170303322d8 to user undefined',
+  level: 'info',
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v22.14.0',
+  pid: 14584,
+  timestamp: '2026-01-05 22:22:04.063'
+}
+{
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v22.14.0',
+  pid: 24312,
+  level: 'error',
+  message: '❌ Error sending notification 0a590470-b682-4f05-acee-a08c2b7214c3: Operation `user_preferences.findOne()` buffering timed out after 10000ms',
+  stack: 'MongooseError: Operation `user_preferences.findOne()` buffering timed out after 10000ms\n' +
+    '    at Timeout.<anonymous> (C:\\Users\\motis\\Downloads\\Notifications\\node_modules\\mongoose\\lib\\drivers\\node-mongodb-native\\collection.js:187:23)\n' +
+    '    at listOnTimeout (node:internal/timers:594:17)\n' +
+    '    at processTimers (node:internal/timers:529:7)',
+  timestamp: '2026-01-05 22:22:05.192'
+}
+{
+  message: '👍 Processing like created event: user-6 -> post post-2',
+  level: 'info',
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v22.14.0',
+  pid: 30108,
+  timestamp: '2026-01-05 22:25:39.579'
+}
+{
+  message: '📤 Sending notification a37d4ab5-49ae-4431-abff-c8062aefdf02 to user user-7',
+  level: 'info',
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v22.14.0',
+  pid: 30108,
+  timestamp: '2026-01-05 22:25:39.616'
+}
+{
+  message: '💬 Processing comment created event: user-3 -> post post-1',
+  level: 'info',
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v22.14.0',
+  pid: 6000,
+  timestamp: '2026-01-05 22:25:39.706'
+}
+{
+  message: '📤 Sending notification e6e6701f-1448-42f5-aeff-7b5450c93870 to user user-2',
+  level: 'info',
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v22.14.0',
+  pid: 6000,
+  timestamp: '2026-01-05 22:25:39.738'
+}
+{
+  message: '🏷️ Processing mention created event: user-4 -> user-5',
+  level: 'info',
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v22.14.0',
+  pid: 32516,
+  timestamp: '2026-01-05 22:25:39.883'
+}
+{
+  message: '📤 Sending notification 8b2f4885-4786-44d1-83ef-7e71e901d89b to user user-5',
+  level: 'info',
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v22.14.0',
+  pid: 32516,
+  timestamp: '2026-01-05 22:25:39.909'
+}
+{
+  message: '👥 Processing user followed event: undefined -> undefined',
+  level: 'info',
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v22.14.0',
+  pid: 6748,
+  timestamp: '2026-01-05 22:25:40.207'
+}
+{
+  message: '📤 Sending notification 15c8768a-25de-417d-968d-d87fcba8557a to user undefined',
+  level: 'info',
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v22.14.0',
+  pid: 6748,
+  timestamp: '2026-01-05 22:25:40.240'
+}
+{
+  message: '👥 Processing user followed event: undefined -> undefined',
+  level: 'info',
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v22.14.0',
+  pid: 21104,
+  timestamp: '2026-01-05 22:25:40.540'
+}
+{
+  message: '📤 Sending notification 1f85c259-e5f4-4ec1-aac3-4ce2b0baa6ff to user undefined',
+  level: 'info',
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v22.14.0',
+  pid: 21104,
+  timestamp: '2026-01-05 22:25:40.576'
+}
+{
+  message: '👍 Processing like created event: user-6 -> post post-2',
+  level: 'info',
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v22.14.0',
+  pid: 30108,
+  timestamp: '2026-01-05 22:25:44.598'
+}
+{
+  message: '📤 Sending notification 896e5616-dcf5-4bad-aa67-79b7d5e018c0 to user user-7',
+  level: 'info',
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v22.14.0',
+  pid: 30108,
+  timestamp: '2026-01-05 22:25:44.603'
+}
+{
+  message: '💬 Processing comment created event: user-3 -> post post-1',
+  level: 'info',
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v22.14.0',
+  pid: 6000,
+  timestamp: '2026-01-05 22:25:44.729'
+}
+{
+  message: '📤 Sending notification e6284d84-6564-4709-a2da-282cfd52a179 to user user-2',
+  level: 'info',
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v22.14.0',
+  pid: 6000,
+  timestamp: '2026-01-05 22:25:44.734'
+}
+{
+  message: '🏷️ Processing mention created event: user-4 -> user-5',
+  level: 'info',
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v22.14.0',
+  pid: 32516,
+  timestamp: '2026-01-05 22:25:44.916'
+}
+{
+  message: '📤 Sending notification 171da828-bb8c-4ecd-9793-271f813e02d6 to user user-5',
+  level: 'info',
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v22.14.0',
+  pid: 32516,
+  timestamp: '2026-01-05 22:25:44.921'
+}
+{
+  message: '👥 Processing user followed event: undefined -> undefined',
+  level: 'info',
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v22.14.0',
+  pid: 6748,
+  timestamp: '2026-01-05 22:25:45.232'
+}
+{
+  message: '📤 Sending notification bb37447d-b8ba-433e-96e8-df837892ff4c to user undefined',
+  level: 'info',
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v22.14.0',
+  pid: 6748,
+  timestamp: '2026-01-05 22:25:45.237'
+}
+{
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v22.14.0',
+  pid: 30108,
+  level: 'error',
+  message: '❌ Error sending notification a37d4ab5-49ae-4431-abff-c8062aefdf02: Operation `user_preferences.findOne()` buffering timed out after 10000ms',
+  stack: 'MongooseError: Operation `user_preferences.findOne()` buffering timed out after 10000ms\n' +
+    '    at Timeout.<anonymous> (C:\\Users\\motis\\Downloads\\Notifications\\node_modules\\mongoose\\lib\\drivers\\node-mongodb-native\\collection.js:187:23)\n' +
+    '    at listOnTimeout (node:internal/timers:594:17)\n' +
+    '    at processTimers (node:internal/timers:529:7)',
+  timestamp: '2026-01-05 22:25:49.676'
+}
+{
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v22.14.0',
+  pid: 6000,
+  level: 'error',
+  message: '❌ Error sending notification e6e6701f-1448-42f5-aeff-7b5450c93870: Operation `user_preferences.findOne()` buffering timed out after 10000ms',
+  stack: 'MongooseError: Operation `user_preferences.findOne()` buffering timed out after 10000ms\n' +
+    '    at Timeout.<anonymous> (C:\\Users\\motis\\Downloads\\Notifications\\node_modules\\mongoose\\lib\\drivers\\node-mongodb-native\\collection.js:187:23)\n' +
+    '    at listOnTimeout (node:internal/timers:594:17)\n' +
+    '    at processTimers (node:internal/timers:529:7)',
+  timestamp: '2026-01-05 22:25:49.778'
+}
+{
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v22.14.0',
+  pid: 32516,
+  level: 'error',
+  message: '❌ Error sending notification 8b2f4885-4786-44d1-83ef-7e71e901d89b: Operation `user_preferences.findOne()` buffering timed out after 10000ms',
+  stack: 'MongooseError: Operation `user_preferences.findOne()` buffering timed out after 10000ms\n' +
+    '    at Timeout.<anonymous> (C:\\Users\\motis\\Downloads\\Notifications\\node_modules\\mongoose\\lib\\drivers\\node-mongodb-native\\collection.js:187:23)\n' +
+    '    at listOnTimeout (node:internal/timers:594:17)\n' +
+    '    at processTimers (node:internal/timers:529:7)',
+  timestamp: '2026-01-05 22:25:49.960'
+}
+{
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v22.14.0',
+  pid: 6748,
+  level: 'error',
+  message: '❌ Error sending notification 15c8768a-25de-417d-968d-d87fcba8557a: Operation `user_preferences.findOne()` buffering timed out after 10000ms',
+  stack: 'MongooseError: Operation `user_preferences.findOne()` buffering timed out after 10000ms\n' +
+    '    at Timeout.<anonymous> (C:\\Users\\motis\\Downloads\\Notifications\\node_modules\\mongoose\\lib\\drivers\\node-mongodb-native\\collection.js:187:23)\n' +
+    '    at listOnTimeout (node:internal/timers:594:17)\n' +
+    '    at processTimers (node:internal/timers:529:7)',
+  timestamp: '2026-01-05 22:25:50.303'
+}
+{
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v22.14.0',
+  pid: 21104,
+  level: 'error',
+  message: '❌ Error sending notification 1f85c259-e5f4-4ec1-aac3-4ce2b0baa6ff: Operation `user_preferences.findOne()` buffering timed out after 10000ms',
+  stack: 'MongooseError: Operation `user_preferences.findOne()` buffering timed out after 10000ms\n' +
+    '    at Timeout.<anonymous> (C:\\Users\\motis\\Downloads\\Notifications\\node_modules\\mongoose\\lib\\drivers\\node-mongodb-native\\collection.js:187:23)\n' +
+    '    at listOnTimeout (node:internal/timers:594:17)\n' +
+    '    at processTimers (node:internal/timers:529:7)',
+  timestamp: '2026-01-05 22:25:50.614'
+}
+{
+  message: '👥 Processing user followed event: undefined -> undefined',
+  level: 'info',
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v22.14.0',
+  pid: 21104,
+  timestamp: '2026-01-05 22:25:50.617'
+}
+{
+  message: '📤 Sending notification 822533fb-1d51-4904-bf44-ed75abceffd7 to user undefined',
+  level: 'info',
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v22.14.0',
+  pid: 21104,
+  timestamp: '2026-01-05 22:25:50.620'
+}
+{
+  message: '💬 Processing comment created event: user-3 -> post post-1',
+  level: 'info',
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v22.14.0',
+  pid: 7236,
+  timestamp: '2026-01-05 22:28:41.102'
+}
+{
+  message: '📤 Sending notification 1a05798e-257f-4108-a79c-cb2ee68e5901 to user user-2',
+  level: 'info',
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v22.14.0',
+  pid: 7236,
+  timestamp: '2026-01-05 22:28:41.137'
+}
+{
+  message: '👍 Processing like created event: user-6 -> post post-2',
+  level: 'info',
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v22.14.0',
+  pid: 11188,
+  timestamp: '2026-01-05 22:28:41.145'
+}
+{
+  message: '📤 Sending notification ed551e83-bd79-4df5-be5f-3cc9d1191fb3 to user user-7',
+  level: 'info',
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v22.14.0',
+  pid: 11188,
+  timestamp: '2026-01-05 22:28:41.182'
+}
+{
+  message: '🏷️ Processing mention created event: user-4 -> user-5',
+  level: 'info',
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v22.14.0',
+  pid: 24780,
+  timestamp: '2026-01-05 22:28:41.144'
+}
+{
+  message: '📤 Sending notification 86bc187c-7200-42ac-aa67-e5d184470869 to user user-5',
+  level: 'info',
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v22.14.0',
+  pid: 24780,
+  timestamp: '2026-01-05 22:28:41.187'
+}
+{
+  message: '👥 Processing user followed event: undefined -> undefined',
+  level: 'info',
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v22.14.0',
+  pid: 25248,
+  timestamp: '2026-01-05 22:28:41.469'
+}
+{
+  message: '📤 Sending notification b84b4492-53be-4957-8fc1-823290c66601 to user undefined',
+  level: 'info',
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v22.14.0',
+  pid: 25248,
+  timestamp: '2026-01-05 22:28:41.495'
+}
+{
+  message: '👥 Processing user followed event: undefined -> undefined',
+  level: 'info',
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v22.14.0',
+  pid: 13964,
+  timestamp: '2026-01-05 22:28:41.540'
+}
+{
+  message: '📤 Sending notification 2f9bdb8b-546a-4902-985a-932d6f7c4423 to user undefined',
+  level: 'info',
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v22.14.0',
+  pid: 13964,
+  timestamp: '2026-01-05 22:28:41.565'
+}
+{
+  message: '💬 Processing comment created event: user-3 -> post post-1',
+  level: 'info',
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v22.14.0',
+  pid: 7236,
+  timestamp: '2026-01-05 22:28:46.136'
+}
+{
+  message: '📤 Sending notification 160b3268-48a4-4477-abe2-3f052a5d6bc4 to user user-2',
+  level: 'info',
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v22.14.0',
+  pid: 7236,
+  timestamp: '2026-01-05 22:28:46.142'
+}
+{
+  message: '🏷️ Processing mention created event: user-4 -> user-5',
+  level: 'info',
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v22.14.0',
+  pid: 24780,
+  timestamp: '2026-01-05 22:28:46.173'
+}
+{
+  message: '👍 Processing like created event: user-6 -> post post-2',
+  level: 'info',
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v22.14.0',
+  pid: 11188,
+  timestamp: '2026-01-05 22:28:46.173'
+}
+{
+  message: '📤 Sending notification cc026b42-3169-4942-8931-b7b3063b3c68 to user user-7',
+  level: 'info',
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v22.14.0',
+  pid: 11188,
+  timestamp: '2026-01-05 22:28:46.179'
+}
+{
+  message: '📤 Sending notification 3bde2267-a3ba-4961-8bf8-d6de9de92b49 to user user-5',
+  level: 'info',
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v22.14.0',
+  pid: 24780,
+  timestamp: '2026-01-05 22:28:46.181'
+}
+{
+  message: '👥 Processing user followed event: undefined -> undefined',
+  level: 'info',
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v22.14.0',
+  pid: 25248,
+  timestamp: '2026-01-05 22:28:46.494'
+}
+{
+  message: '📤 Sending notification 2ed3507f-3397-4455-ab2d-a2843a542ce2 to user undefined',
+  level: 'info',
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v22.14.0',
+  pid: 25248,
+  timestamp: '2026-01-05 22:28:46.503'
+}
+{
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v22.14.0',
+  pid: 7236,
+  level: 'error',
+  message: '❌ Error sending notification 1a05798e-257f-4108-a79c-cb2ee68e5901: Operation `user_preferences.findOne()` buffering timed out after 10000ms',
+  stack: 'MongooseError: Operation `user_preferences.findOne()` buffering timed out after 10000ms\n' +
+    '    at Timeout.<anonymous> (C:\\Users\\motis\\Downloads\\Notifications\\node_modules\\mongoose\\lib\\drivers\\node-mongodb-native\\collection.js:187:23)\n' +
+    '    at listOnTimeout (node:internal/timers:594:17)\n' +
+    '    at processTimers (node:internal/timers:529:7)',
+  timestamp: '2026-01-05 22:28:51.204'
+}
+{
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v22.14.0',
+  pid: 24780,
+  level: 'error',
+  message: '❌ Error sending notification 86bc187c-7200-42ac-aa67-e5d184470869: Operation `user_preferences.findOne()` buffering timed out after 10000ms',
+  stack: 'MongooseError: Operation `user_preferences.findOne()` buffering timed out after 10000ms\n' +
+    '    at Timeout.<anonymous> (C:\\Users\\motis\\Downloads\\Notifications\\node_modules\\mongoose\\lib\\drivers\\node-mongodb-native\\collection.js:187:23)\n' +
+    '    at listOnTimeout (node:internal/timers:594:17)\n' +
+    '    at processTimers (node:internal/timers:529:7)',
+  timestamp: '2026-01-05 22:28:51.235'
+}
+{
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v22.14.0',
+  pid: 11188,
+  level: 'error',
+  message: '❌ Error sending notification ed551e83-bd79-4df5-be5f-3cc9d1191fb3: Operation `user_preferences.findOne()` buffering timed out after 10000ms',
+  stack: 'MongooseError: Operation `user_preferences.findOne()` buffering timed out after 10000ms\n' +
+    '    at Timeout.<anonymous> (C:\\Users\\motis\\Downloads\\Notifications\\node_modules\\mongoose\\lib\\drivers\\node-mongodb-native\\collection.js:187:23)\n' +
+    '    at listOnTimeout (node:internal/timers:594:17)\n' +
+    '    at processTimers (node:internal/timers:529:7)',
+  timestamp: '2026-01-05 22:28:51.234'
+}
+{
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v22.14.0',
+  pid: 25248,
+  level: 'error',
+  message: '❌ Error sending notification b84b4492-53be-4957-8fc1-823290c66601: Operation `user_preferences.findOne()` buffering timed out after 10000ms',
+  stack: 'MongooseError: Operation `user_preferences.findOne()` buffering timed out after 10000ms\n' +
+    '    at Timeout.<anonymous> (C:\\Users\\motis\\Downloads\\Notifications\\node_modules\\mongoose\\lib\\drivers\\node-mongodb-native\\collection.js:187:23)\n' +
+    '    at listOnTimeout (node:internal/timers:594:17)\n' +
+    '    at processTimers (node:internal/timers:529:7)',
+  timestamp: '2026-01-05 22:28:51.579'
+}
+{
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v22.14.0',
+  pid: 13964,
+  level: 'error',
+  message: '❌ Error sending notification 2f9bdb8b-546a-4902-985a-932d6f7c4423: Operation `user_preferences.findOne()` buffering timed out after 10000ms',
+  stack: 'MongooseError: Operation `user_preferences.findOne()` buffering timed out after 10000ms\n' +
+    '    at Timeout.<anonymous> (C:\\Users\\motis\\Downloads\\Notifications\\node_modules\\mongoose\\lib\\drivers\\node-mongodb-native\\collection.js:187:23)\n' +
+    '    at listOnTimeout (node:internal/timers:594:17)\n' +
+    '    at processTimers (node:internal/timers:529:7)',
+  timestamp: '2026-01-05 22:28:51.598'
+}
+{
+  message: '👥 Processing user followed event: undefined -> undefined',
+  level: 'info',
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v22.14.0',
+  pid: 13964,
+  timestamp: '2026-01-05 22:28:51.605'
+}
+{
+  message: '📤 Sending notification 925427db-c66e-41df-88fb-0bc067a104c0 to user undefined',
+  level: 'info',
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v22.14.0',
+  pid: 13964,
+  timestamp: '2026-01-05 22:28:51.612'
+}
+{
+  message: '👥 Processing user followed event: undefined -> undefined',
+  level: 'info',
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v22.14.0',
+  pid: 23488,
+  timestamp: '2026-01-05 22:35:54.137'
+}
+{
+  message: '👥 Processing user followed event: undefined -> undefined',
+  level: 'info',
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v22.14.0',
+  pid: 23488,
+  timestamp: '2026-01-05 22:35:54.188'
+}
+{
+  message: '👥 Processing user followed event: undefined -> undefined',
+  level: 'info',
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v22.14.0',
+  pid: 30820,
+  timestamp: '2026-01-05 22:35:54.339'
+}
+{
+  message: '👥 Processing user followed event: undefined -> undefined',
+  level: 'info',
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v22.14.0',
+  pid: 30820,
+  timestamp: '2026-01-05 22:35:54.413'
+}
+{
+  message: '👍 Processing like created event: user-6 -> post post-2',
+  level: 'info',
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v22.14.0',
+  pid: 26348,
+  timestamp: '2026-01-05 22:35:54.541'
+}
+{
+  message: '👍 Processing like created event: user-6 -> post post-2',
+  level: 'info',
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v22.14.0',
+  pid: 26348,
+  timestamp: '2026-01-05 22:35:54.610'
+}
+{
+  message: '🏷️ Processing mention created event: user-4 -> user-5',
+  level: 'info',
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v22.14.0',
+  pid: 25248,
+  timestamp: '2026-01-05 22:35:55.883'
+}
+{
+  message: '🏷️ Processing mention created event: user-4 -> user-5',
+  level: 'info',
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v22.14.0',
+  pid: 25248,
+  timestamp: '2026-01-05 22:35:55.949'
+}
+{
+  message: '💬 Processing comment created event: user-3 -> post post-1',
+  level: 'info',
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v22.14.0',
+  pid: 11236,
+  timestamp: '2026-01-05 22:35:56.153'
+}
+{
+  message: '💬 Processing comment created event: user-3 -> post post-1',
+  level: 'info',
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v22.14.0',
+  pid: 11236,
+  timestamp: '2026-01-05 22:35:56.227'
+}
+{
+  message: '🏷️ Processing mention created event: user-4 -> user-5',
+  level: 'info',
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v22.14.0',
+  pid: 15160,
+  timestamp: '2026-01-05 22:39:05.267'
+}
+{
+  message: '🏷️ Processing mention created event: user-4 -> user-5',
+  level: 'info',
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v22.14.0',
+  pid: 15160,
+  timestamp: '2026-01-05 22:39:05.343'
+}
+{
+  message: '👥 Processing user followed event: undefined -> undefined',
+  level: 'info',
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v22.14.0',
+  pid: 23948,
+  timestamp: '2026-01-05 22:39:05.286'
+}
+{
+  message: '👥 Processing user followed event: undefined -> undefined',
+  level: 'info',
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v22.14.0',
+  pid: 23948,
+  timestamp: '2026-01-05 22:39:05.340'
+}
+{
+  message: '👍 Processing like created event: user-6 -> post post-2',
+  level: 'info',
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v22.14.0',
+  pid: 23252,
+  timestamp: '2026-01-05 22:39:05.329'
+}
+{
+  message: '👍 Processing like created event: user-6 -> post post-2',
+  level: 'info',
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v22.14.0',
+  pid: 23252,
+  timestamp: '2026-01-05 22:39:05.421'
+}
+{
+  message: '👥 Processing user followed event: undefined -> undefined',
+  level: 'info',
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v22.14.0',
+  pid: 12460,
+  timestamp: '2026-01-05 22:39:05.339'
+}
+{
+  message: '👥 Processing user followed event: undefined -> undefined',
+  level: 'info',
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v22.14.0',
+  pid: 12460,
+  timestamp: '2026-01-05 22:39:05.454'
+}
+{
+  message: '💬 Processing comment created event: user-3 -> post post-1',
+  level: 'info',
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v22.14.0',
+  pid: 26340,
+  timestamp: '2026-01-05 22:39:05.488'
+}
+{
+  message: '💬 Processing comment created event: user-3 -> post post-1',
+  level: 'info',
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v22.14.0',
+  pid: 26340,
+  timestamp: '2026-01-05 22:39:05.561'
+}
+{
+  message: '👥 Processing user followed event: undefined -> undefined',
+  level: 'info',
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v22.14.0',
+  pid: 25760,
+  timestamp: '2026-01-06 21:12:18.504'
+}
+{
+  message: '👥 Processing user followed event: undefined -> undefined',
+  level: 'info',
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v22.14.0',
+  pid: 25760,
+  timestamp: '2026-01-06 21:12:18.605'
+}
+{
+  message: '👥 Processing user followed event: undefined -> undefined',
+  level: 'info',
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v22.14.0',
+  pid: 29572,
+  timestamp: '2026-01-06 21:12:18.502'
+}
+{
+  message: '👥 Processing user followed event: undefined -> undefined',
+  level: 'info',
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v22.14.0',
+  pid: 29572,
+  timestamp: '2026-01-06 21:12:18.605'
+}
+{
+  message: '👍 Processing like created event: user-6 -> post post-2',
+  level: 'info',
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v22.14.0',
+  pid: 14692,
+  timestamp: '2026-01-06 21:12:18.981'
+}
+{
+  message: '👍 Processing like created event: user-6 -> post post-2',
+  level: 'info',
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v22.14.0',
+  pid: 14692,
+  timestamp: '2026-01-06 21:12:19.049'
+}
+{
+  message: '🏷️ Processing mention created event: user-4 -> user-5',
+  level: 'info',
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v22.14.0',
+  pid: 9668,
+  timestamp: '2026-01-06 21:12:19.000'
+}
+{
+  message: '🏷️ Processing mention created event: user-4 -> user-5',
+  level: 'info',
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v22.14.0',
+  pid: 9668,
+  timestamp: '2026-01-06 21:12:19.074'
+}
+{
+  message: '💬 Processing comment created event: user-3 -> post post-1',
+  level: 'info',
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v22.14.0',
+  pid: 16864,
+  timestamp: '2026-01-06 21:12:19.016'
+}
+{
+  message: '💬 Processing comment created event: user-3 -> post post-1',
+  level: 'info',
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v22.14.0',
+  pid: 16864,
+  timestamp: '2026-01-06 21:12:19.079'
+}
+{
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v22.14.0',
+  pid: 28232,
+  config: {
+    errorThreshold: 0.05,
+    windowSize: 3600000,
+    minimumRequests: 10,
+    openTimeout: 600000,
+    halfOpenSuccessThreshold: 10,
+    halfOpenMaxRequests: 10,
+    errorDuration: 120000
+  },
+  level: 'info',
+  message: 'Circuit breaker initialized: apns',
+  timestamp: '2026-01-06 22:06:48.513'
+}
+{
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v22.14.0',
+  pid: 16472,
+  config: {
+    errorThreshold: 0.05,
+    windowSize: 3600000,
+    minimumRequests: 10,
+    openTimeout: 600000,
+    halfOpenSuccessThreshold: 10,
+    halfOpenMaxRequests: 10,
+    errorDuration: 120000
+  },
+  level: 'info',
+  message: 'Circuit breaker initialized: apns',
+  timestamp: '2026-01-06 22:06:48.511'
+}
+{
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v22.14.0',
+  pid: 28232,
+  config: {
+    errorThreshold: 0.05,
+    windowSize: 3600000,
+    minimumRequests: 10,
+    openTimeout: 600000,
+    halfOpenSuccessThreshold: 10,
+    halfOpenMaxRequests: 10,
+    errorDuration: 120000
+  },
+  level: 'info',
+  message: 'Circuit breaker initialized: fcm',
+  timestamp: '2026-01-06 22:06:48.549'
+}
+{
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v22.14.0',
+  pid: 16472,
+  config: {
+    errorThreshold: 0.05,
+    windowSize: 3600000,
+    minimumRequests: 10,
+    openTimeout: 600000,
+    halfOpenSuccessThreshold: 10,
+    halfOpenMaxRequests: 10,
+    errorDuration: 120000
+  },
+  level: 'info',
+  message: 'Circuit breaker initialized: fcm',
+  timestamp: '2026-01-06 22:06:48.549'
+}
+{
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v22.14.0',
+  pid: 13284,
+  config: {
+    errorThreshold: 0.05,
+    windowSize: 3600000,
+    minimumRequests: 10,
+    openTimeout: 600000,
+    halfOpenSuccessThreshold: 10,
+    halfOpenMaxRequests: 10,
+    errorDuration: 120000
+  },
+  level: 'info',
+  message: 'Circuit breaker initialized: apns',
+  timestamp: '2026-01-06 22:09:17.288'
+}
+{
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v22.14.0',
+  pid: 13284,
+  config: {
+    errorThreshold: 0.05,
+    windowSize: 3600000,
+    minimumRequests: 10,
+    openTimeout: 600000,
+    halfOpenSuccessThreshold: 10,
+    halfOpenMaxRequests: 10,
+    errorDuration: 120000
+  },
+  level: 'info',
+  message: 'Circuit breaker initialized: fcm',
+  timestamp: '2026-01-06 22:09:17.318'
+}
+{
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v22.14.0',
+  pid: 20112,
+  config: {
+    errorThreshold: 0.05,
+    windowSize: 3600000,
+    minimumRequests: 10,
+    openTimeout: 600000,
+    halfOpenSuccessThreshold: 10,
+    halfOpenMaxRequests: 10,
+    errorDuration: 120000
+  },
+  level: 'info',
+  message: 'Circuit breaker initialized: apns',
+  timestamp: '2026-01-06 22:09:17.449'
+}
+{
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v22.14.0',
+  pid: 20112,
+  config: {
+    errorThreshold: 0.05,
+    windowSize: 3600000,
+    minimumRequests: 10,
+    openTimeout: 600000,
+    halfOpenSuccessThreshold: 10,
+    halfOpenMaxRequests: 10,
+    errorDuration: 120000
+  },
+  level: 'info',
+  message: 'Circuit breaker initialized: fcm',
+  timestamp: '2026-01-06 22:09:17.478'
+}
+{
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v22.14.0',
+  pid: 4680,
+  config: {
+    errorThreshold: 0.05,
+    windowSize: 3600000,
+    minimumRequests: 10,
+    openTimeout: 600000,
+    halfOpenSuccessThreshold: 10,
+    halfOpenMaxRequests: 10,
+    errorDuration: 120000
+  },
+  level: 'info',
+  message: 'Circuit breaker initialized: apns',
+  timestamp: '2026-01-07 13:37:44.273'
+}
+{
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v22.14.0',
+  pid: 4680,
+  config: {
+    errorThreshold: 0.05,
+    windowSize: 3600000,
+    minimumRequests: 10,
+    openTimeout: 600000,
+    halfOpenSuccessThreshold: 10,
+    halfOpenMaxRequests: 10,
+    errorDuration: 120000
+  },
+  level: 'info',
+  message: 'Circuit breaker initialized: fcm',
+  timestamp: '2026-01-07 13:37:44.316'
+}
+{
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v22.14.0',
+  pid: 24584,
+  config: {
+    errorThreshold: 0.05,
+    windowSize: 3600000,
+    minimumRequests: 10,
+    openTimeout: 600000,
+    halfOpenSuccessThreshold: 10,
+    halfOpenMaxRequests: 10,
+    errorDuration: 120000
+  },
+  level: 'info',
+  message: 'Circuit breaker initialized: apns',
+  timestamp: '2026-01-07 13:37:44.278'
+}
+{
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v22.14.0',
+  pid: 24584,
+  config: {
+    errorThreshold: 0.05,
+    windowSize: 3600000,
+    minimumRequests: 10,
+    openTimeout: 600000,
+    halfOpenSuccessThreshold: 10,
+    halfOpenMaxRequests: 10,
+    errorDuration: 120000
+  },
+  level: 'info',
+  message: 'Circuit breaker initialized: fcm',
+  timestamp: '2026-01-07 13:37:44.321'
+}

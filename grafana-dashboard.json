@@ -1,0 +1,202 @@
+{
+  "dashboard": {
+    "title": "Notification Service - Horizontal Scaling",
+    "tags": ["notifications", "workers", "scaling"],
+    "timezone": "browser",
+    "panels": [
+      {
+        "id": 1,
+        "title": "Worker CPU Usage",
+        "type": "graph",
+        "gridPos": { "x": 0, "y": 0, "w": 12, "h": 8 },
+        "targets": [
+          {
+            "expr": "worker_cpu_usage_percent",
+            "legendFormat": "{{instance}}"
+          }
+        ],
+        "yaxes": [
+          { "label": "CPU %", "min": 0, "max": 100 }
+        ]
+      },
+      {
+        "id": 2,
+        "title": "Worker Memory Usage",
+        "type": "graph",
+        "gridPos": { "x": 12, "y": 0, "w": 12, "h": 8 },
+        "targets": [
+          {
+            "expr": "worker_memory_usage_bytes / 1024 / 1024",
+            "legendFormat": "{{instance}}"
+          }
+        ],
+        "yaxes": [
+          { "label": "Memory (MB)", "min": 0 }
+        ]
+      },
+      {
+        "id": 3,
+        "title": "Queue Depth (Pending)",
+        "type": "graph",
+        "gridPos": { "x": 0, "y": 8, "w": 8, "h": 8 },
+        "targets": [
+          {
+            "expr": "sum(notification_queue_depth{status=\"pending\"})",
+            "legendFormat": "Pending"
+          }
+        ],
+        "yaxes": [
+          { "label": "Count", "min": 0 }
+        ]
+      },
+      {
+        "id": 4,
+        "title": "Queue Depth (Scheduled)",
+        "type": "graph",
+        "gridPos": { "x": 8, "y": 8, "w": 8, "h": 8 },
+        "targets": [
+          {
+            "expr": "sum(notification_queue_depth{status=\"scheduled\"})",
+            "legendFormat": "Scheduled"
+          }
+        ],
+        "yaxes": [
+          { "label": "Count", "min": 0 }
+        ]
+      },
+      {
+        "id": 5,
+        "title": "Queue Depth (Locked)",
+        "type": "graph",
+        "gridPos": { "x": 16, "y": 8, "w": 8, "h": 8 },
+        "targets": [
+          {
+            "expr": "sum(notification_queue_depth{status=\"locked\"})",
+            "legendFormat": "Locked"
+          }
+        ],
+        "yaxes": [
+          { "label": "Count", "min": 0 }
+        ]
+      },
+      {
+        "id": 6,
+        "title": "Database Connections",
+        "type": "graph",
+        "gridPos": { "x": 0, "y": 16, "w": 12, "h": 8 },
+        "targets": [
+          {
+            "expr": "database_connections_total",
+            "legendFormat": "{{instance}}"
+          }
+        ],
+        "yaxes": [
+          { "label": "Connections", "min": 0 }
+        ]
+      },
+      {
+        "id": 7,
+        "title": "Worker Uptime",
+        "type": "graph",
+        "gridPos": { "x": 12, "y": 16, "w": 12, "h": 8 },
+        "targets": [
+          {
+            "expr": "worker_uptime_seconds / 3600",
+            "legendFormat": "{{instance}}"
+          }
+        ],
+        "yaxes": [
+          { "label": "Hours", "min": 0 }
+        ]
+      },
+      {
+        "id": 8,
+        "title": "Processing Rate (Notifications/sec)",
+        "type": "graph",
+        "gridPos": { "x": 0, "y": 24, "w": 12, "h": 8 },
+        "targets": [
+          {
+            "expr": "rate(worker_processed_notifications_total[5m])",
+            "legendFormat": "{{instance}}"
+          }
+        ],
+        "yaxes": [
+          { "label": "Notifications/sec", "min": 0 }
+        ]
+      },
+      {
+        "id": 9,
+        "title": "Success Rate (%)",
+        "type": "graph",
+        "gridPos": { "x": 12, "y": 24, "w": 12, "h": 8 },
+        "targets": [
+          {
+            "expr": "(worker_processed_notifications_total / (worker_processed_notifications_total + worker_failed_notifications_total)) * 100",
+            "legendFormat": "{{instance}}"
+          }
+        ],
+        "yaxes": [
+          { "label": "Success %", "min": 0, "max": 100 }
+        ]
+      },
+      {
+        "id": 10,
+        "title": "Total Throughput",
+        "type": "singlestat",
+        "gridPos": { "x": 0, "y": 32, "w": 6, "h": 4 },
+        "targets": [
+          {
+            "expr": "sum(rate(worker_processed_notifications_total[5m]))"
+          }
+        ],
+        "format": "short",
+        "postfix": " notif/sec",
+        "valueName": "current"
+      },
+      {
+        "id": 11,
+        "title": "Total Queue Depth",
+        "type": "singlestat",
+        "gridPos": { "x": 6, "y": 32, "w": 6, "h": 4 },
+        "targets": [
+          {
+            "expr": "sum(notification_queue_depth)"
+          }
+        ],
+        "format": "short",
+        "valueName": "current"
+      },
+      {
+        "id": 12,
+        "title": "Active Workers",
+        "type": "singlestat",
+        "gridPos": { "x": 12, "y": 32, "w": 6, "h": 4 },
+        "targets": [
+          {
+            "expr": "count(up{job=\"workers\"})"
+          }
+        ],
+        "format": "short",
+        "valueName": "current"
+      },
+      {
+        "id": 13,
+        "title": "Overall Success Rate",
+        "type": "singlestat",
+        "gridPos": { "x": 18, "y": 32, "w": 6, "h": 4 },
+        "targets": [
+          {
+            "expr": "(sum(worker_processed_notifications_total) / (sum(worker_processed_notifications_total) + sum(worker_failed_notifications_total))) * 100"
+          }
+        ],
+        "format": "percent",
+        "valueName": "current"
+      }
+    ],
+    "refresh": "10s",
+    "time": {
+      "from": "now-1h",
+      "to": "now"
+    }
+  }
+}

@@ -1,0 +1,168 @@
+{
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v22.14.0',
+  pid: 14584,
+  level: 'error',
+  message: '❌ Error sending notification 64c67408-dbed-4ce5-a0e2-02cd8f20c7fb: Operation `user_preferences.findOne()` buffering timed out after 10000ms',
+  stack: 'MongooseError: Operation `user_preferences.findOne()` buffering timed out after 10000ms\n' +
+    '    at Timeout.<anonymous> (C:\\Users\\motis\\Downloads\\Notifications\\node_modules\\mongoose\\lib\\drivers\\node-mongodb-native\\collection.js:187:23)\n' +
+    '    at listOnTimeout (node:internal/timers:594:17)\n' +
+    '    at processTimers (node:internal/timers:529:7)',
+  timestamp: '2026-01-05 22:22:04.057'
+}
+{
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v22.14.0',
+  pid: 24312,
+  level: 'error',
+  message: '❌ Error sending notification 0a590470-b682-4f05-acee-a08c2b7214c3: Operation `user_preferences.findOne()` buffering timed out after 10000ms',
+  stack: 'MongooseError: Operation `user_preferences.findOne()` buffering timed out after 10000ms\n' +
+    '    at Timeout.<anonymous> (C:\\Users\\motis\\Downloads\\Notifications\\node_modules\\mongoose\\lib\\drivers\\node-mongodb-native\\collection.js:187:23)\n' +
+    '    at listOnTimeout (node:internal/timers:594:17)\n' +
+    '    at processTimers (node:internal/timers:529:7)',
+  timestamp: '2026-01-05 22:22:05.192'
+}
+{
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v22.14.0',
+  pid: 30108,
+  level: 'error',
+  message: '❌ Error sending notification a37d4ab5-49ae-4431-abff-c8062aefdf02: Operation `user_preferences.findOne()` buffering timed out after 10000ms',
+  stack: 'MongooseError: Operation `user_preferences.findOne()` buffering timed out after 10000ms\n' +
+    '    at Timeout.<anonymous> (C:\\Users\\motis\\Downloads\\Notifications\\node_modules\\mongoose\\lib\\drivers\\node-mongodb-native\\collection.js:187:23)\n' +
+    '    at listOnTimeout (node:internal/timers:594:17)\n' +
+    '    at processTimers (node:internal/timers:529:7)',
+  timestamp: '2026-01-05 22:25:49.676'
+}
+{
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v22.14.0',
+  pid: 6000,
+  level: 'error',
+  message: '❌ Error sending notification e6e6701f-1448-42f5-aeff-7b5450c93870: Operation `user_preferences.findOne()` buffering timed out after 10000ms',
+  stack: 'MongooseError: Operation `user_preferences.findOne()` buffering timed out after 10000ms\n' +
+    '    at Timeout.<anonymous> (C:\\Users\\motis\\Downloads\\Notifications\\node_modules\\mongoose\\lib\\drivers\\node-mongodb-native\\collection.js:187:23)\n' +
+    '    at listOnTimeout (node:internal/timers:594:17)\n' +
+    '    at processTimers (node:internal/timers:529:7)',
+  timestamp: '2026-01-05 22:25:49.778'
+}
+{
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v22.14.0',
+  pid: 32516,
+  level: 'error',
+  message: '❌ Error sending notification 8b2f4885-4786-44d1-83ef-7e71e901d89b: Operation `user_preferences.findOne()` buffering timed out after 10000ms',
+  stack: 'MongooseError: Operation `user_preferences.findOne()` buffering timed out after 10000ms\n' +
+    '    at Timeout.<anonymous> (C:\\Users\\motis\\Downloads\\Notifications\\node_modules\\mongoose\\lib\\drivers\\node-mongodb-native\\collection.js:187:23)\n' +
+    '    at listOnTimeout (node:internal/timers:594:17)\n' +
+    '    at processTimers (node:internal/timers:529:7)',
+  timestamp: '2026-01-05 22:25:49.960'
+}
+{
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v22.14.0',
+  pid: 6748,
+  level: 'error',
+  message: '❌ Error sending notification 15c8768a-25de-417d-968d-d87fcba8557a: Operation `user_preferences.findOne()` buffering timed out after 10000ms',
+  stack: 'MongooseError: Operation `user_preferences.findOne()` buffering timed out after 10000ms\n' +
+    '    at Timeout.<anonymous> (C:\\Users\\motis\\Downloads\\Notifications\\node_modules\\mongoose\\lib\\drivers\\node-mongodb-native\\collection.js:187:23)\n' +
+    '    at listOnTimeout (node:internal/timers:594:17)\n' +
+    '    at processTimers (node:internal/timers:529:7)',
+  timestamp: '2026-01-05 22:25:50.303'
+}
+{
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v22.14.0',
+  pid: 21104,
+  level: 'error',
+  message: '❌ Error sending notification 1f85c259-e5f4-4ec1-aac3-4ce2b0baa6ff: Operation `user_preferences.findOne()` buffering timed out after 10000ms',
+  stack: 'MongooseError: Operation `user_preferences.findOne()` buffering timed out after 10000ms\n' +
+    '    at Timeout.<anonymous> (C:\\Users\\motis\\Downloads\\Notifications\\node_modules\\mongoose\\lib\\drivers\\node-mongodb-native\\collection.js:187:23)\n' +
+    '    at listOnTimeout (node:internal/timers:594:17)\n' +
+    '    at processTimers (node:internal/timers:529:7)',
+  timestamp: '2026-01-05 22:25:50.614'
+}
+{
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v22.14.0',
+  pid: 7236,
+  level: 'error',
+  message: '❌ Error sending notification 1a05798e-257f-4108-a79c-cb2ee68e5901: Operation `user_preferences.findOne()` buffering timed out after 10000ms',
+  stack: 'MongooseError: Operation `user_preferences.findOne()` buffering timed out after 10000ms\n' +
+    '    at Timeout.<anonymous> (C:\\Users\\motis\\Downloads\\Notifications\\node_modules\\mongoose\\lib\\drivers\\node-mongodb-native\\collection.js:187:23)\n' +
+    '    at listOnTimeout (node:internal/timers:594:17)\n' +
+    '    at processTimers (node:internal/timers:529:7)',
+  timestamp: '2026-01-05 22:28:51.204'
+}
+{
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v22.14.0',
+  pid: 11188,
+  level: 'error',
+  message: '❌ Error sending notification ed551e83-bd79-4df5-be5f-3cc9d1191fb3: Operation `user_preferences.findOne()` buffering timed out after 10000ms',
+  stack: 'MongooseError: Operation `user_preferences.findOne()` buffering timed out after 10000ms\n' +
+    '    at Timeout.<anonymous> (C:\\Users\\motis\\Downloads\\Notifications\\node_modules\\mongoose\\lib\\drivers\\node-mongodb-native\\collection.js:187:23)\n' +
+    '    at listOnTimeout (node:internal/timers:594:17)\n' +
+    '    at processTimers (node:internal/timers:529:7)',
+  timestamp: '2026-01-05 22:28:51.234'
+}
+{
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v22.14.0',
+  pid: 24780,
+  level: 'error',
+  message: '❌ Error sending notification 86bc187c-7200-42ac-aa67-e5d184470869: Operation `user_preferences.findOne()` buffering timed out after 10000ms',
+  stack: 'MongooseError: Operation `user_preferences.findOne()` buffering timed out after 10000ms\n' +
+    '    at Timeout.<anonymous> (C:\\Users\\motis\\Downloads\\Notifications\\node_modules\\mongoose\\lib\\drivers\\node-mongodb-native\\collection.js:187:23)\n' +
+    '    at listOnTimeout (node:internal/timers:594:17)\n' +
+    '    at processTimers (node:internal/timers:529:7)',
+  timestamp: '2026-01-05 22:28:51.235'
+}
+{
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v22.14.0',
+  pid: 25248,
+  level: 'error',
+  message: '❌ Error sending notification b84b4492-53be-4957-8fc1-823290c66601: Operation `user_preferences.findOne()` buffering timed out after 10000ms',
+  stack: 'MongooseError: Operation `user_preferences.findOne()` buffering timed out after 10000ms\n' +
+    '    at Timeout.<anonymous> (C:\\Users\\motis\\Downloads\\Notifications\\node_modules\\mongoose\\lib\\drivers\\node-mongodb-native\\collection.js:187:23)\n' +
+    '    at listOnTimeout (node:internal/timers:594:17)\n' +
+    '    at processTimers (node:internal/timers:529:7)',
+  timestamp: '2026-01-05 22:28:51.579'
+}
+{
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v22.14.0',
+  pid: 13964,
+  level: 'error',
+  message: '❌ Error sending notification 2f9bdb8b-546a-4902-985a-932d6f7c4423: Operation `user_preferences.findOne()` buffering timed out after 10000ms',
+  stack: 'MongooseError: Operation `user_preferences.findOne()` buffering timed out after 10000ms\n' +
+    '    at Timeout.<anonymous> (C:\\Users\\motis\\Downloads\\Notifications\\node_modules\\mongoose\\lib\\drivers\\node-mongodb-native\\collection.js:187:23)\n' +
+    '    at listOnTimeout (node:internal/timers:594:17)\n' +
+    '    at processTimers (node:internal/timers:529:7)',
+  timestamp: '2026-01-05 22:28:51.598'
+}

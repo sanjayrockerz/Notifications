@@ -1,0 +1,89 @@
+# Prometheus Configuration
+# 
+# Scrapes metrics from:
+# - API instances
+# - Worker instances
+# - MongoDB exporter
+# - Redis exporter
+# - RabbitMQ exporter
+
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+  external_labels:
+    cluster: 'notification-service'
+    environment: 'production'
+
+# Scrape configurations
+scrape_configs:
+  # API instances
+  - job_name: 'api'
+    static_configs:
+      - targets:
+          - 'api-1:3000'
+          - 'api-2:3000'
+        labels:
+          service: 'api'
+
+  # Worker instances
+  - job_name: 'workers'
+    static_configs:
+      - targets:
+          - 'worker-1:9091'
+          - 'worker-2:9091'
+          - 'worker-3:9091'
+          - 'worker-4:9091'
+          - 'worker-5:9091'
+        labels:
+          service: 'worker'
+
+  # Load balancer
+  - job_name: 'nginx'
+    static_configs:
+      - targets:
+          - 'nginx:8080'
+        labels:
+          service: 'loadbalancer'
+
+  # MongoDB
+  - job_name: 'mongodb'
+    static_configs:
+      - targets:
+          - 'mongodb:9216'
+        labels:
+          service: 'database'
+
+  # Redis
+  - job_name: 'redis'
+    static_configs:
+      - targets:
+          - 'redis:9121'
+        labels:
+          service: 'cache'
+
+  # RabbitMQ
+  - job_name: 'rabbitmq'
+    static_configs:
+      - targets:
+          - 'rabbitmq:15692'
+        labels:
+          service: 'messagequeue'
+
+  # Prometheus itself
+  - job_name: 'prometheus'
+    static_configs:
+      - targets:
+          - 'localhost:9090'
+        labels:
+          service: 'monitoring'
+
+# Alerting rules
+rule_files:
+  - '/etc/prometheus/alerts/*.yml'
+
+# Alertmanager configuration
+alerting:
+  alertmanagers:
+    - static_configs:
+        - targets:
+            - 'alertmanager:9093'
