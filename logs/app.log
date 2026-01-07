@@ -1174,3 +1174,561 @@
   message: 'Circuit breaker initialized: fcm',
   timestamp: '2026-01-07 13:37:44.321'
 }
+{
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v22.14.0',
+  pid: 11268,
+  config: {
+    errorThreshold: 0.05,
+    windowSize: 3600000,
+    minimumRequests: 10,
+    openTimeout: 600000,
+    halfOpenSuccessThreshold: 10,
+    halfOpenMaxRequests: 10,
+    errorDuration: 120000
+  },
+  level: 'info',
+  message: 'Circuit breaker initialized: apns',
+  timestamp: '2026-01-07 19:09:18.352'
+}
+{
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v22.14.0',
+  pid: 3900,
+  config: {
+    errorThreshold: 0.05,
+    windowSize: 3600000,
+    minimumRequests: 10,
+    openTimeout: 600000,
+    halfOpenSuccessThreshold: 10,
+    halfOpenMaxRequests: 10,
+    errorDuration: 120000
+  },
+  level: 'info',
+  message: 'Circuit breaker initialized: apns',
+  timestamp: '2026-01-07 19:09:18.351'
+}
+{
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v22.14.0',
+  pid: 11268,
+  config: {
+    errorThreshold: 0.05,
+    windowSize: 3600000,
+    minimumRequests: 10,
+    openTimeout: 600000,
+    halfOpenSuccessThreshold: 10,
+    halfOpenMaxRequests: 10,
+    errorDuration: 120000
+  },
+  level: 'info',
+  message: 'Circuit breaker initialized: fcm',
+  timestamp: '2026-01-07 19:09:18.569'
+}
+{
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v22.14.0',
+  pid: 3900,
+  config: {
+    errorThreshold: 0.05,
+    windowSize: 3600000,
+    minimumRequests: 10,
+    openTimeout: 600000,
+    halfOpenSuccessThreshold: 10,
+    halfOpenMaxRequests: 10,
+    errorDuration: 120000
+  },
+  level: 'info',
+  message: 'Circuit breaker initialized: fcm',
+  timestamp: '2026-01-07 19:09:18.567'
+}
+{
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v22.14.0',
+  pid: 3548,
+  config: {
+    errorThreshold: 0.05,
+    windowSize: 3600000,
+    minimumRequests: 10,
+    openTimeout: 600000,
+    halfOpenSuccessThreshold: 10,
+    halfOpenMaxRequests: 10,
+    errorDuration: 120000
+  },
+  level: 'info',
+  message: 'Circuit breaker initialized: apns',
+  timestamp: '2026-01-07 19:11:46.372'
+}
+{
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v22.14.0',
+  pid: 3548,
+  config: {
+    errorThreshold: 0.05,
+    windowSize: 3600000,
+    minimumRequests: 10,
+    openTimeout: 600000,
+    halfOpenSuccessThreshold: 10,
+    halfOpenMaxRequests: 10,
+    errorDuration: 120000
+  },
+  level: 'info',
+  message: 'Circuit breaker initialized: fcm',
+  timestamp: '2026-01-07 19:11:46.453'
+}
+{
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v22.14.0',
+  pid: 4240,
+  config: {
+    errorThreshold: 0.05,
+    windowSize: 3600000,
+    minimumRequests: 10,
+    openTimeout: 600000,
+    halfOpenSuccessThreshold: 10,
+    halfOpenMaxRequests: 10,
+    errorDuration: 120000
+  },
+  level: 'info',
+  message: 'Circuit breaker initialized: apns',
+  timestamp: '2026-01-07 19:11:46.452'
+}
+{
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v22.14.0',
+  pid: 4240,
+  config: {
+    errorThreshold: 0.05,
+    windowSize: 3600000,
+    minimumRequests: 10,
+    openTimeout: 600000,
+    halfOpenSuccessThreshold: 10,
+    halfOpenMaxRequests: 10,
+    errorDuration: 120000
+  },
+  level: 'info',
+  message: 'Circuit breaker initialized: fcm',
+  timestamp: '2026-01-07 19:11:46.526'
+}
+{
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v22.14.0',
+  pid: 32044,
+  config: {
+    errorThreshold: 0.05,
+    windowSize: 3600000,
+    minimumRequests: 10,
+    openTimeout: 600000,
+    halfOpenSuccessThreshold: 10,
+    halfOpenMaxRequests: 10,
+    errorDuration: 120000
+  },
+  level: 'info',
+  message: 'Circuit breaker initialized: apns',
+  timestamp: '2026-01-07 19:41:22.125'
+}
+{
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v22.14.0',
+  pid: 32044,
+  config: {
+    errorThreshold: 0.05,
+    windowSize: 3600000,
+    minimumRequests: 10,
+    openTimeout: 600000,
+    halfOpenSuccessThreshold: 10,
+    halfOpenMaxRequests: 10,
+    errorDuration: 120000
+  },
+  level: 'info',
+  message: 'Circuit breaker initialized: fcm',
+  timestamp: '2026-01-07 19:41:22.393'
+}
+{
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v22.14.0',
+  pid: 5156,
+  config: {
+    errorThreshold: 0.05,
+    windowSize: 3600000,
+    minimumRequests: 10,
+    openTimeout: 600000,
+    halfOpenSuccessThreshold: 10,
+    halfOpenMaxRequests: 10,
+    errorDuration: 120000
+  },
+  level: 'info',
+  message: 'Circuit breaker initialized: apns',
+  timestamp: '2026-01-07 19:41:22.127'
+}
+{
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v22.14.0',
+  pid: 5156,
+  config: {
+    errorThreshold: 0.05,
+    windowSize: 3600000,
+    minimumRequests: 10,
+    openTimeout: 600000,
+    halfOpenSuccessThreshold: 10,
+    halfOpenMaxRequests: 10,
+    errorDuration: 120000
+  },
+  level: 'info',
+  message: 'Circuit breaker initialized: fcm',
+  timestamp: '2026-01-07 19:41:22.410'
+}
+{
+  message: '🏷️ Processing mention created event: user-4 -> user-5',
+  level: 'info',
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v22.14.0',
+  pid: 27304,
+  timestamp: '2026-01-07 19:41:30.079'
+}
+{
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v22.14.0',
+  pid: 27304,
+  config: {
+    errorThreshold: 0.05,
+    windowSize: 3600000,
+    minimumRequests: 10,
+    openTimeout: 600000,
+    halfOpenSuccessThreshold: 10,
+    halfOpenMaxRequests: 10,
+    errorDuration: 120000
+  },
+  level: 'info',
+  message: 'Circuit breaker initialized: apns',
+  timestamp: '2026-01-07 19:41:27.846'
+}
+{
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v22.14.0',
+  pid: 27304,
+  config: {
+    errorThreshold: 0.05,
+    windowSize: 3600000,
+    minimumRequests: 10,
+    openTimeout: 600000,
+    halfOpenSuccessThreshold: 10,
+    halfOpenMaxRequests: 10,
+    errorDuration: 120000
+  },
+  level: 'info',
+  message: 'Circuit breaker initialized: fcm',
+  timestamp: '2026-01-07 19:41:27.906'
+}
+{
+  message: '💬 Processing comment created event: user-3 -> post post-1',
+  level: 'info',
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v22.14.0',
+  pid: 17472,
+  timestamp: '2026-01-07 19:41:30.082'
+}
+{
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v22.14.0',
+  pid: 17472,
+  config: {
+    errorThreshold: 0.05,
+    windowSize: 3600000,
+    minimumRequests: 10,
+    openTimeout: 600000,
+    halfOpenSuccessThreshold: 10,
+    halfOpenMaxRequests: 10,
+    errorDuration: 120000
+  },
+  level: 'info',
+  message: 'Circuit breaker initialized: apns',
+  timestamp: '2026-01-07 19:41:28.184'
+}
+{
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v22.14.0',
+  pid: 17472,
+  config: {
+    errorThreshold: 0.05,
+    windowSize: 3600000,
+    minimumRequests: 10,
+    openTimeout: 600000,
+    halfOpenSuccessThreshold: 10,
+    halfOpenMaxRequests: 10,
+    errorDuration: 120000
+  },
+  level: 'info',
+  message: 'Circuit breaker initialized: fcm',
+  timestamp: '2026-01-07 19:41:28.248'
+}
+{
+  message: '👥 Processing user followed event: user-1 -> user-2',
+  level: 'info',
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v22.14.0',
+  pid: 20892,
+  timestamp: '2026-01-07 19:41:30.085'
+}
+{
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v22.14.0',
+  pid: 20892,
+  config: {
+    errorThreshold: 0.05,
+    windowSize: 3600000,
+    minimumRequests: 10,
+    openTimeout: 600000,
+    halfOpenSuccessThreshold: 10,
+    halfOpenMaxRequests: 10,
+    errorDuration: 120000
+  },
+  level: 'info',
+  message: 'Circuit breaker initialized: apns',
+  timestamp: '2026-01-07 19:41:27.820'
+}
+{
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v22.14.0',
+  pid: 20892,
+  config: {
+    errorThreshold: 0.05,
+    windowSize: 3600000,
+    minimumRequests: 10,
+    openTimeout: 600000,
+    halfOpenSuccessThreshold: 10,
+    halfOpenMaxRequests: 10,
+    errorDuration: 120000
+  },
+  level: 'info',
+  message: 'Circuit breaker initialized: fcm',
+  timestamp: '2026-01-07 19:41:27.887'
+}
+{
+  message: '👍 Processing like created event: user-6 -> post post-2',
+  level: 'info',
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v22.14.0',
+  pid: 10340,
+  timestamp: '2026-01-07 19:41:30.085'
+}
+{
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v22.14.0',
+  pid: 10340,
+  config: {
+    errorThreshold: 0.05,
+    windowSize: 3600000,
+    minimumRequests: 10,
+    openTimeout: 600000,
+    halfOpenSuccessThreshold: 10,
+    halfOpenMaxRequests: 10,
+    errorDuration: 120000
+  },
+  level: 'info',
+  message: 'Circuit breaker initialized: apns',
+  timestamp: '2026-01-07 19:41:27.825'
+}
+{
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v22.14.0',
+  pid: 10340,
+  config: {
+    errorThreshold: 0.05,
+    windowSize: 3600000,
+    minimumRequests: 10,
+    openTimeout: 600000,
+    halfOpenSuccessThreshold: 10,
+    halfOpenMaxRequests: 10,
+    errorDuration: 120000
+  },
+  level: 'info',
+  message: 'Circuit breaker initialized: fcm',
+  timestamp: '2026-01-07 19:41:27.888'
+}
+{
+  message: '👥 Processing user followed event: user-1 -> user-2',
+  level: 'info',
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v22.14.0',
+  pid: 32712,
+  timestamp: '2026-01-07 19:41:30.085'
+}
+{
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v22.14.0',
+  pid: 32712,
+  config: {
+    errorThreshold: 0.05,
+    windowSize: 3600000,
+    minimumRequests: 10,
+    openTimeout: 600000,
+    halfOpenSuccessThreshold: 10,
+    halfOpenMaxRequests: 10,
+    errorDuration: 120000
+  },
+  level: 'info',
+  message: 'Circuit breaker initialized: apns',
+  timestamp: '2026-01-07 19:41:27.944'
+}
+{
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v22.14.0',
+  pid: 32712,
+  config: {
+    errorThreshold: 0.05,
+    windowSize: 3600000,
+    minimumRequests: 10,
+    openTimeout: 600000,
+    halfOpenSuccessThreshold: 10,
+    halfOpenMaxRequests: 10,
+    errorDuration: 120000
+  },
+  level: 'info',
+  message: 'Circuit breaker initialized: fcm',
+  timestamp: '2026-01-07 19:41:28.012'
+}
+{
+  message: '👥 Processing user followed event: user-1 -> user-2',
+  level: 'info',
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v22.14.0',
+  pid: 20892,
+  timestamp: '2026-01-07 19:41:35.128'
+}
+{
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v22.14.0',
+  pid: 27304,
+  level: 'error',
+  message: 'Error checking user preferences: Operation `user_preferences.findOne()` buffering timed out after 10000ms',
+  stack: 'MongooseError: Operation `user_preferences.findOne()` buffering timed out after 10000ms\n' +
+    '    at Timeout.<anonymous> (C:\\Users\\motis\\Downloads\\Notifications\\node_modules\\mongoose\\lib\\drivers\\node-mongodb-native\\collection.js:187:23)\n' +
+    '    at listOnTimeout (node:internal/timers:594:17)\n' +
+    '    at processTimers (node:internal/timers:529:7)',
+  timestamp: '2026-01-07 19:41:40.145'
+}
+{
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v22.14.0',
+  pid: 32712,
+  level: 'error',
+  message: 'Error checking user preferences: Operation `user_preferences.findOne()` buffering timed out after 10000ms',
+  stack: 'MongooseError: Operation `user_preferences.findOne()` buffering timed out after 10000ms\n' +
+    '    at Timeout.<anonymous> (C:\\Users\\motis\\Downloads\\Notifications\\node_modules\\mongoose\\lib\\drivers\\node-mongodb-native\\collection.js:187:23)\n' +
+    '    at listOnTimeout (node:internal/timers:594:17)\n' +
+    '    at processTimers (node:internal/timers:529:7)',
+  timestamp: '2026-01-07 19:41:40.145'
+}
+{
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v22.14.0',
+  pid: 10340,
+  level: 'error',
+  message: 'Error checking user preferences: Operation `user_preferences.findOne()` buffering timed out after 10000ms',
+  stack: 'MongooseError: Operation `user_preferences.findOne()` buffering timed out after 10000ms\n' +
+    '    at Timeout.<anonymous> (C:\\Users\\motis\\Downloads\\Notifications\\node_modules\\mongoose\\lib\\drivers\\node-mongodb-native\\collection.js:187:23)\n' +
+    '    at listOnTimeout (node:internal/timers:594:17)\n' +
+    '    at processTimers (node:internal/timers:529:7)',
+  timestamp: '2026-01-07 19:41:40.147'
+}
+{
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v22.14.0',
+  pid: 20892,
+  level: 'error',
+  message: 'Error checking user preferences: Operation `user_preferences.findOne()` buffering timed out after 10000ms',
+  stack: 'MongooseError: Operation `user_preferences.findOne()` buffering timed out after 10000ms\n' +
+    '    at Timeout.<anonymous> (C:\\Users\\motis\\Downloads\\Notifications\\node_modules\\mongoose\\lib\\drivers\\node-mongodb-native\\collection.js:187:23)\n' +
+    '    at listOnTimeout (node:internal/timers:594:17)\n' +
+    '    at processTimers (node:internal/timers:529:7)',
+  timestamp: '2026-01-07 19:41:40.145'
+}
+{
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v22.14.0',
+  pid: 17472,
+  level: 'error',
+  message: 'Error checking user preferences: Operation `user_preferences.findOne()` buffering timed out after 10000ms',
+  stack: 'MongooseError: Operation `user_preferences.findOne()` buffering timed out after 10000ms\n' +
+    '    at Timeout.<anonymous> (C:\\Users\\motis\\Downloads\\Notifications\\node_modules\\mongoose\\lib\\drivers\\node-mongodb-native\\collection.js:187:23)\n' +
+    '    at listOnTimeout (node:internal/timers:594:17)\n' +
+    '    at processTimers (node:internal/timers:529:7)',
+  timestamp: '2026-01-07 19:41:40.147'
+}
+{
+  message: '👥 Processing user followed event: user-1 -> user-2',
+  level: 'info',
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v22.14.0',
+  pid: 32712,
+  timestamp: '2026-01-07 19:41:40.153'
+}

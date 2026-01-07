@@ -8,6 +8,10 @@ jest.mock('../src/services/NotificationService');
 jest.mock('../src/config/redis');
 jest.mock('../src/config/database');
 jest.mock('../src/config/messageQueue');
+jest.mock('../src/models/UserPreferences');
+jest.mock('../src/models/Device');
+jest.mock('../src/models/Notification');
+jest.mock('../src/models/ProcessedEvent');
 
 const mockSendNotification = jest.fn();
 
@@ -17,15 +21,15 @@ describe('EventHandlerService.handleUserFollowedEvent', () => {
   beforeEach(() => {
     jest.clearAllMocks();
     (NotificationService as jest.MockedClass<typeof NotificationService>).mockImplementation(() => ({
-      sendNotification: mockSendNotification,
-      initialize: jest.fn().mockResolvedValue(undefined),
+      sendNotification: mockSendNotification as any,
+      initialize: (jest.fn() as any).mockResolvedValue(undefined),
     } as any));
     
     handler = new EventHandlerService();
   });
 
   it('should create a notification via NotificationService', async () => {
-    mockSendNotification.mockResolvedValue({
+    (mockSendNotification as any).mockResolvedValue({
       notificationId: 'notif-1',
       status: 'success',
       message: 'Notification sent',
@@ -52,7 +56,7 @@ describe('EventHandlerService.handleUserFollowedEvent', () => {
   });
 
   it('should handle failures gracefully', async () => {
-    mockSendNotification.mockResolvedValue({
+    (mockSendNotification as any).mockResolvedValue({
       notificationId: 'notif-1',
       status: 'failed',
       message: 'No devices found',

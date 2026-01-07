@@ -1,1 +1,10 @@
 node_modules
+coverage/
+logs/
+*.log
+.env
+.env.local
+.env.test
+dist/
+build/
+.DS_Store

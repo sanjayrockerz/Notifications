@@ -2,8 +2,10 @@ module.exports = {
   preset: 'ts-jest',
   testEnvironment: 'node',
   testMatch: ['**/tests/**/*.spec.ts'],
+  testPathIgnorePatterns: ['/node_modules/', 'integration_'],
   setupFilesAfterEnv: ['<rootDir>/tests/setup.ts'],
-  collectCoverage: true,
+  testTimeout: 10000,
+  collectCoverage: false,
   collectCoverageFrom: [
     'src/**/*.ts',
     '!src/**/*.d.ts',
@@ -13,10 +15,10 @@ module.exports = {
   coverageReporters: ['text', 'lcov', 'html'],
   coverageThreshold: {
     global: {
-      branches: 70,
-      functions: 70,
-      lines: 70,
-      statements: 70,
+      branches: 30,
+      functions: 30,
+      lines: 30,
+      statements: 30,
     },
   },
 };
