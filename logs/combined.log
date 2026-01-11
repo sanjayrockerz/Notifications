@@ -1732,3 +1732,270 @@
   pid: 32712,
   timestamp: '2026-01-07 19:41:40.153'
 }
+{
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v24.7.0',
+  pid: 19128,
+  correlationId: undefined,
+  level: 'info',
+  message: '🏷️ Processing mention created event: user-4 -> user-5',
+  timestamp: '2026-01-11 21:13:13.042'
+}
+{
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v24.7.0',
+  pid: 19128,
+  config: {
+    errorThreshold: 0.05,
+    windowSize: 3600000,
+    minimumRequests: 10,
+    openTimeout: 600000,
+    halfOpenSuccessThreshold: 10,
+    halfOpenMaxRequests: 10,
+    errorDuration: 120000
+  },
+  level: 'info',
+  message: 'Circuit breaker initialized: apns',
+  timestamp: '2026-01-11 21:13:11.076'
+}
+{
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v24.7.0',
+  pid: 19128,
+  config: {
+    errorThreshold: 0.05,
+    windowSize: 3600000,
+    minimumRequests: 10,
+    openTimeout: 600000,
+    halfOpenSuccessThreshold: 10,
+    halfOpenMaxRequests: 10,
+    errorDuration: 120000
+  },
+  level: 'info',
+  message: 'Circuit breaker initialized: fcm',
+  timestamp: '2026-01-11 21:13:11.105'
+}
+{
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v24.7.0',
+  pid: 19127,
+  correlationId: undefined,
+  level: 'info',
+  message: '👥 Processing user followed event: user-1 -> user-2',
+  timestamp: '2026-01-11 21:13:13.026'
+}
+{
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v24.7.0',
+  pid: 19127,
+  config: {
+    errorThreshold: 0.05,
+    windowSize: 3600000,
+    minimumRequests: 10,
+    openTimeout: 600000,
+    halfOpenSuccessThreshold: 10,
+    halfOpenMaxRequests: 10,
+    errorDuration: 120000
+  },
+  level: 'info',
+  message: 'Circuit breaker initialized: apns',
+  timestamp: '2026-01-11 21:13:11.076'
+}
+{
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v24.7.0',
+  pid: 19127,
+  correlationId: undefined,
+  level: 'info',
+  message: '👥 Processing user followed event: user-1 -> user-2',
+  timestamp: '2026-01-11 21:13:13.028'
+}
+{
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v24.7.0',
+  pid: 19127,
+  config: {
+    errorThreshold: 0.05,
+    windowSize: 3600000,
+    minimumRequests: 10,
+    openTimeout: 600000,
+    halfOpenSuccessThreshold: 10,
+    halfOpenMaxRequests: 10,
+    errorDuration: 120000
+  },
+  level: 'info',
+  message: 'Circuit breaker initialized: fcm',
+  timestamp: '2026-01-11 21:13:11.127'
+}
+{
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v24.7.0',
+  pid: 19131,
+  correlationId: undefined,
+  level: 'info',
+  message: '👥 Processing user followed event: user-1 -> user-2',
+  timestamp: '2026-01-11 21:13:13.027'
+}
+{
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v24.7.0',
+  pid: 19131,
+  config: {
+    errorThreshold: 0.05,
+    windowSize: 3600000,
+    minimumRequests: 10,
+    openTimeout: 600000,
+    halfOpenSuccessThreshold: 10,
+    halfOpenMaxRequests: 10,
+    errorDuration: 120000
+  },
+  level: 'info',
+  message: 'Circuit breaker initialized: apns',
+  timestamp: '2026-01-11 21:13:11.077'
+}
+{
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v24.7.0',
+  pid: 19131,
+  correlationId: undefined,
+  level: 'info',
+  message: '👥 Processing user followed event: user-1 -> user-2',
+  timestamp: '2026-01-11 21:13:13.032'
+}
+{
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v24.7.0',
+  pid: 19131,
+  config: {
+    errorThreshold: 0.05,
+    windowSize: 3600000,
+    minimumRequests: 10,
+    openTimeout: 600000,
+    halfOpenSuccessThreshold: 10,
+    halfOpenMaxRequests: 10,
+    errorDuration: 120000
+  },
+  level: 'info',
+  message: 'Circuit breaker initialized: fcm',
+  timestamp: '2026-01-11 21:13:11.107'
+}
+{
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v24.7.0',
+  pid: 19130,
+  correlationId: undefined,
+  level: 'info',
+  message: '💬 Processing comment created event: user-3 -> post post-1',
+  timestamp: '2026-01-11 21:13:13.131'
+}
+{
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v24.7.0',
+  pid: 19130,
+  config: {
+    errorThreshold: 0.05,
+    windowSize: 3600000,
+    minimumRequests: 10,
+    openTimeout: 600000,
+    halfOpenSuccessThreshold: 10,
+    halfOpenMaxRequests: 10,
+    errorDuration: 120000
+  },
+  level: 'info',
+  message: 'Circuit breaker initialized: apns',
+  timestamp: '2026-01-11 21:13:11.079'
+}
+{
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v24.7.0',
+  pid: 19130,
+  config: {
+    errorThreshold: 0.05,
+    windowSize: 3600000,
+    minimumRequests: 10,
+    openTimeout: 600000,
+    halfOpenSuccessThreshold: 10,
+    halfOpenMaxRequests: 10,
+    errorDuration: 120000
+  },
+  level: 'info',
+  message: 'Circuit breaker initialized: fcm',
+  timestamp: '2026-01-11 21:13:11.110'
+}
+{
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v24.7.0',
+  pid: 19129,
+  correlationId: undefined,
+  level: 'info',
+  message: '👍 Processing like created event: user-6 -> post post-2',
+  timestamp: '2026-01-11 21:13:13.136'
+}
+{
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v24.7.0',
+  pid: 19129,
+  config: {
+    errorThreshold: 0.05,
+    windowSize: 3600000,
+    minimumRequests: 10,
+    openTimeout: 600000,
+    halfOpenSuccessThreshold: 10,
+    halfOpenMaxRequests: 10,
+    errorDuration: 120000
+  },
+  level: 'info',
+  message: 'Circuit breaker initialized: apns',
+  timestamp: '2026-01-11 21:13:11.095'
+}
+{
+  service: 'notification-service',
+  version: '1.0.0',
+  environment: 'test',
+  nodeVersion: 'v24.7.0',
+  pid: 19129,
+  config: {
+    errorThreshold: 0.05,
+    windowSize: 3600000,
+    minimumRequests: 10,
+    openTimeout: 600000,
+    halfOpenSuccessThreshold: 10,
+    halfOpenMaxRequests: 10,
+    errorDuration: 120000
+  },
+  level: 'info',
+  message: 'Circuit breaker initialized: fcm',
+  timestamp: '2026-01-11 21:13:11.127'
+}

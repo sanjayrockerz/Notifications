@@ -10,6 +10,7 @@ interface JWTPayload {
   role?: string;
   iat: number;
   exp: number;
+  kid?: string; // Key ID for rotation
 }
 
 // Extend Request type to include user info
@@ -23,12 +24,172 @@ declare global {
   }
 }
 
-// JWT secret
-const JWT_SECRET: string = process.env.JWT_SECRET || 'default-dev-secret';
-if (!process.env.JWT_SECRET && process.env.NODE_ENV === 'production') {
-  logger.error('JWT_SECRET environment variable is required in production');
-  process.exit(1);
+// ============================================================================
+// JWT Secret Rotation Support
+// ============================================================================
+
+interface JWTKeyConfig {
+  key: string;
+  keyId: string;
+  isActive: boolean; // Only active keys can sign new tokens
+  expiresAt?: Date | undefined; // When this key should no longer be accepted
 }
+
+/**
+ * JWT Key Manager with rotation support
+ * 
+ * ROTATION STRATEGY:
+ * 1. Add new key with isActive: true
+ * 2. Keep old key with isActive: false (for validation only)
+ * 3. After token lifetime passes, remove old key
+ * 
+ * CONFIGURATION:
+ * - JWT_SECRET: Primary signing key (required)
+ * - JWT_SECRET_OLD: Previous key for rotation (optional)
+ * - JWT_KEY_ID: Key ID for the primary key (optional, defaults to 'primary')
+ * - JWT_OLD_KEY_EXPIRY: When to stop accepting old key (ISO date, optional)
+ */
+class JWTKeyManager {
+  private keys: JWTKeyConfig[] = [];
+  private defaultKeyId = 'primary';
+
+  constructor() {
+    this.loadKeys();
+  }
+
+  private loadKeys(): void {
+    const primarySecret = process.env.JWT_SECRET || 'default-dev-secret';
+    const oldSecret = process.env.JWT_SECRET_OLD;
+    const primaryKeyId = process.env.JWT_KEY_ID || 'primary';
+    const oldKeyExpiry = process.env.JWT_OLD_KEY_EXPIRY;
+
+    // Warn in production if using default secret
+    if (!process.env.JWT_SECRET && process.env.NODE_ENV === 'production') {
+      logger.error('JWT_SECRET environment variable is required in production');
+      process.exit(1);
+    }
+
+    // Add primary key
+    this.keys.push({
+      key: primarySecret,
+      keyId: primaryKeyId,
+      isActive: true,
+    });
+    this.defaultKeyId = primaryKeyId;
+
+    // Add old key if provided (for rotation)
+    if (oldSecret) {
+      this.keys.push({
+        key: oldSecret,
+        keyId: process.env.JWT_OLD_KEY_ID || 'previous',
+        isActive: false,
+        expiresAt: oldKeyExpiry ? new Date(oldKeyExpiry) : undefined,
+      });
+      logger.info('JWT key rotation enabled - old key configured', {
+        oldKeyExpiry: oldKeyExpiry || 'never',
+      });
+    }
+
+    logger.info(`JWT keys loaded: ${this.keys.length} key(s) available`, {
+      keyIds: this.keys.map(k => k.keyId),
+    });
+  }
+
+  /**
+   * Get the active key for signing new tokens
+   */
+  getSigningKey(): { key: string; keyId: string } {
+    const activeKey = this.keys.find(k => k.isActive);
+    if (!activeKey) {
+      throw new Error('No active JWT signing key available');
+    }
+    return { key: activeKey.key, keyId: activeKey.keyId };
+  }
+
+  /**
+   * Get all valid keys for verification
+   * Returns keys in order of preference (active first)
+   */
+  getVerificationKeys(): JWTKeyConfig[] {
+    const now = new Date();
+    return this.keys
+      .filter(k => !k.expiresAt || k.expiresAt > now)
+      .sort((a, b) => (b.isActive ? 1 : 0) - (a.isActive ? 1 : 0));
+  }
+
+  /**
+   * Verify a token with key rotation support
+   * Tries all valid keys until one works
+   */
+  verify(token: string): JWTPayload {
+    const validKeys = this.getVerificationKeys();
+    let lastError: Error | null = null;
+
+    for (const keyConfig of validKeys) {
+      try {
+        const decoded = jwt.verify(token, keyConfig.key) as JWTPayload;
+        
+        // If token has kid claim, verify it matches (for strict rotation)
+        if (decoded.kid && decoded.kid !== keyConfig.keyId) {
+          continue; // Try next key
+        }
+
+        return decoded;
+      } catch (error) {
+        lastError = error as Error;
+        // Continue to next key
+      }
+    }
+
+    // All keys failed
+    throw lastError || new Error('Token verification failed');
+  }
+
+  /**
+   * Sign a new token with the active key
+   */
+  sign(payload: Omit<JWTPayload, 'iat' | 'exp' | 'kid'>, expiresIn: string = '24h'): string {
+    const { key, keyId } = this.getSigningKey();
+    
+    return jwt.sign(
+      { ...payload, kid: keyId },
+      key,
+      { expiresIn } as jwt.SignOptions
+    );
+  }
+
+  /**
+   * Reload keys from environment (for dynamic rotation)
+   */
+  reloadKeys(): void {
+    this.keys = [];
+    this.loadKeys();
+  }
+
+  /**
+   * Get key status for monitoring
+   */
+  getKeyStatus(): Array<{
+    keyId: string;
+    isActive: boolean;
+    expiresAt?: Date | undefined;
+    isExpired: boolean;
+  }> {
+    const now = new Date();
+    return this.keys.map(k => ({
+      keyId: k.keyId,
+      isActive: k.isActive,
+      expiresAt: k.expiresAt,
+      isExpired: k.expiresAt ? k.expiresAt <= now : false,
+    }));
+  }
+}
+
+// Singleton instance
+export const jwtKeyManager = new JWTKeyManager();
+
+// Legacy single-key support (for backwards compatibility)
+const JWT_SECRET: string = jwtKeyManager.getSigningKey().key;
 
 // Public routes that don't require authentication
 const PUBLIC_ROUTES = [
@@ -76,8 +237,9 @@ export const authMiddleware = async (req: Request, res: Response, next: NextFunc
       throw createError.unauthorized('Token has been revoked');
     }
     
-    // Verify JWT token
-    const decoded = jwt.verify(token, JWT_SECRET) as JWTPayload;
+    // Verify JWT token with rotation support
+    // Uses JWTKeyManager to try all valid keys
+    const decoded = jwtKeyManager.verify(token);
     
     // Check token expiration
     if (decoded.exp <= Math.floor(Date.now() / 1000)) {

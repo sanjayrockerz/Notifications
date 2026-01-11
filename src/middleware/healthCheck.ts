@@ -1,11 +1,47 @@
 import { Request, Response, NextFunction } from 'express';
 import mongoose from 'mongoose';
 import { getRedisClient } from '../config/redis';
-import { getChannel } from '../config/messageQueue';
-import { isFirebaseInitialized } from '../config/firebase';
+import { getChannel, isMessageQueueConnected } from '../config/messageQueue';
+import { isFirebaseInitialized, getMessaging } from '../config/firebase';
 import { isAPNsInitialized } from '../config/apns';
 import { logger, logHealth } from '../utils/logger';
 import { asyncHandler } from './errorHandler';
+
+/**
+ * Health Check Probes - Kubernetes-style separation
+ * 
+ * LIVENESS (/health/live):
+ *   - Checks if process is alive and not deadlocked
+ *   - NEVER checks external dependencies (Redis, Mongo, RabbitMQ)
+ *   - Failure triggers pod restart
+ *   - Should always pass unless process is stuck
+ * 
+ * READINESS (/health/ready):
+ *   - Checks if service can handle traffic
+ *   - Checks critical dependencies (DB, Redis, MessageQueue)
+ *   - Failure removes pod from load balancer (no restart)
+ *   - Transient dependency issues won't cause restarts
+ * 
+ * STARTUP (/health/startup):
+ *   - Checks if initialization is complete
+ *   - Has longer timeout for slow-starting services
+ *   - Only checked during startup phase
+ *   - Prevents liveness probe from killing slow starters
+ */
+
+// Track initialization state for startup probe
+let isFullyInitialized = false;
+let initializationError: Error | null = null;
+
+export function markInitializationComplete(): void {
+  isFullyInitialized = true;
+  logger.info('✅ Service initialization marked as complete');
+}
+
+export function markInitializationFailed(error: Error): void {
+  initializationError = error;
+  logger.error('❌ Service initialization failed:', error);
+}
 
 interface HealthStatus {
   status: 'healthy' | 'unhealthy';
@@ -65,6 +101,8 @@ export const healthCheckMiddleware = asyncHandler(async (req: Request, res: Resp
     return await readinessCheck(req, res);
   } else if (req.path === '/health/live') {
     return await livenessCheck(req, res);
+  } else if (req.path === '/health/startup') {
+    return await startupCheck(req, res);
   }
   
   next();
@@ -157,37 +195,197 @@ async function detailedHealthCheck(req: Request, res: Response): Promise<void> {
 }
 
 // Kubernetes readiness probe
+// Checks if service can handle traffic - external dependency failures here
+// won't trigger restarts, just remove from load balancer
 async function readinessCheck(req: Request, res: Response): Promise<void> {
+  const startTime = Date.now();
+  
   try {
-    // Check critical services that are required for serving requests
+    // Check critical services required for serving requests
+    // These are the dependencies that MUST be available for traffic handling
+    const [database, redis, messageQueue] = await Promise.all([
+      checkDatabase(),
+      checkRedis(),
+      checkMessageQueue(),
+    ]);
+    
+    const isReady = 
+      database.status === 'healthy' && 
+      redis.status === 'healthy' &&
+      messageQueue.status === 'healthy';
+    
+    const responseTime = Date.now() - startTime;
+    
+    if (isReady) {
+      res.status(200).json({ 
+        status: 'ready',
+        responseTime: `${responseTime}ms`,
+        timestamp: new Date().toISOString(),
+        checks: {
+          database: database.status,
+          redis: redis.status,
+          messageQueue: messageQueue.status,
+        }
+      });
+    } else {
+      // Log which service is unhealthy for debugging
+      logger.warn('Readiness check failed', {
+        database: database.status,
+        redis: redis.status,
+        messageQueue: messageQueue.status,
+        responseTime,
+      });
+      
+      res.status(503).json({
+        status: 'not ready',
+        responseTime: `${responseTime}ms`,
+        timestamp: new Date().toISOString(),
+        checks: {
+          database: { status: database.status, message: database.message },
+          redis: { status: redis.status, message: redis.message },
+          messageQueue: { status: messageQueue.status, message: messageQueue.message },
+        },
+      });
+    }
+  } catch (error) {
+    logger.error('Readiness check error:', error);
+    res.status(503).json({ 
+      status: 'not ready', 
+      error: 'Health check failed',
+      timestamp: new Date().toISOString(),
+    });
+  }
+}
+
+// Kubernetes liveness probe
+// ONLY checks if the process is alive and responsive
+// NEVER checks external dependencies - we don't want to restart
+// just because Redis/Mongo/RabbitMQ has a transient issue
+async function livenessCheck(req: Request, res: Response): Promise<void> {
+  try {
+    // Check 1: Event loop is responsive (we got here, so it is)
+    // Check 2: Memory is not critically exhausted
+    const memUsage = process.memoryUsage();
+    const heapUsedPercent = (memUsage.heapUsed / memUsage.heapTotal) * 100;
+    
+    // Check 3: Process uptime indicates we're running
+    const uptime = Math.floor(process.uptime());
+    
+    // Only fail liveness if we're in a truly broken state
+    // High memory usage could indicate a leak
+    const isAlive = heapUsedPercent < 95; // Allow some headroom
+    
+    if (isAlive) {
+      res.status(200).json({
+        status: 'alive',
+        timestamp: new Date().toISOString(),
+        uptime,
+        memory: {
+          heapUsedPercent: `${heapUsedPercent.toFixed(1)}%`,
+          heapUsedMB: Math.round(memUsage.heapUsed / 1024 / 1024),
+          heapTotalMB: Math.round(memUsage.heapTotal / 1024 / 1024),
+        },
+      });
+    } else {
+      // Critical: memory exhaustion indicates pod should restart
+      logger.error('Liveness check failed: memory exhaustion', {
+        heapUsedPercent,
+        heapUsedMB: Math.round(memUsage.heapUsed / 1024 / 1024),
+      });
+      
+      res.status(503).json({
+        status: 'not alive',
+        reason: 'memory_exhaustion',
+        memory: {
+          heapUsedPercent: `${heapUsedPercent.toFixed(1)}%`,
+        },
+        timestamp: new Date().toISOString(),
+      });
+    }
+  } catch (error) {
+    // If we can't even check memory, something is very wrong
+    logger.error('Liveness check error:', error);
+    res.status(503).json({ 
+      status: 'not alive', 
+      reason: 'internal_error',
+      timestamp: new Date().toISOString(),
+    });
+  }
+}
+
+// Kubernetes startup probe
+// Checks if initialization is complete
+// Has longer timeout, only checked during startup phase
+async function startupCheck(req: Request, res: Response): Promise<void> {
+  try {
+    // Check if initialization completed successfully
+    if (initializationError) {
+      logger.error('Startup check failed: initialization error', {
+        error: initializationError.message,
+      });
+      
+      res.status(503).json({
+        status: 'not started',
+        reason: 'initialization_failed',
+        error: initializationError.message,
+        timestamp: new Date().toISOString(),
+      });
+      return;
+    }
+    
+    if (!isFullyInitialized) {
+      // Still initializing - this is normal during startup
+      res.status(503).json({
+        status: 'starting',
+        reason: 'initialization_in_progress',
+        uptime: Math.floor(process.uptime()),
+        timestamp: new Date().toISOString(),
+      });
+      return;
+    }
+    
+    // Initialization complete - now do a basic connectivity check
+    // This ensures we're actually ready to start serving
     const [database, redis] = await Promise.all([
       checkDatabase(),
       checkRedis(),
     ]);
     
-    const isReady = database.status === 'healthy' && redis.status === 'healthy';
+    const isStarted = 
+      database.status === 'healthy' && 
+      redis.status === 'healthy';
     
-    if (isReady) {
-      res.status(200).json({ status: 'ready' });
+    if (isStarted) {
+      res.status(200).json({
+        status: 'started',
+        timestamp: new Date().toISOString(),
+        uptime: Math.floor(process.uptime()),
+        checks: {
+          initialized: true,
+          database: database.status,
+          redis: redis.status,
+        },
+      });
     } else {
       res.status(503).json({
-        status: 'not ready',
-        services: { database: database.status, redis: redis.status },
+        status: 'not started',
+        reason: 'dependencies_unavailable',
+        checks: {
+          initialized: true,
+          database: { status: database.status, message: database.message },
+          redis: { status: redis.status, message: redis.message },
+        },
+        timestamp: new Date().toISOString(),
       });
     }
   } catch (error) {
-    res.status(503).json({ status: 'not ready', error: 'Health check failed' });
+    logger.error('Startup check error:', error);
+    res.status(503).json({
+      status: 'not started',
+      reason: 'startup_check_error',
+      timestamp: new Date().toISOString(),
+    });
   }
-}
-
-// Kubernetes liveness probe
-async function livenessCheck(req: Request, res: Response): Promise<void> {
-  // Simple check that the process is alive and responsive
-  res.status(200).json({
-    status: 'alive',
-    timestamp: new Date().toISOString(),
-    uptime: Math.floor(process.uptime()),
-  });
 }
 
 // Individual service health checks

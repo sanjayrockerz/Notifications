@@ -215,6 +215,17 @@ NotificationSchema.index({ category: 1, createdAt: -1 });
 NotificationSchema.index({ tags: 1 });
 NotificationSchema.index({ source: 1, createdAt: -1 });
 
+// Cursor-based pagination indexes - compound for equality + sort pattern
+// Supports: { userId, isRead } + sort by { createdAt: -1, _id: -1 }
+NotificationSchema.index(
+  { userId: 1, isRead: 1, createdAt: -1, _id: -1 },
+  { name: 'cursor_pagination_unread' }
+);
+NotificationSchema.index(
+  { userId: 1, createdAt: -1, _id: -1 },
+  { name: 'cursor_pagination_all' }
+);
+
 // Idempotency indexes - prevents duplicate notifications
 // Composite unique index for follow/like type notifications
 NotificationSchema.index(

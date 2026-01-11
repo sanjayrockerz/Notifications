@@ -4,7 +4,7 @@ import Notification from '../models/Notification';
 import GroupNotification from '../models/GroupNotification';
 import mongoose from 'mongoose';
 import { createClient } from 'redis';
-import { fanoutService } from '../services/FanoutService';
+import { fanoutService, encodeCursor, decodeCursor } from '../services/FanoutService';
 import { logger } from '../utils/logger';
 
 // Use a singleton Redis client
@@ -28,12 +28,23 @@ export default {
       const limit = Math.min(Number(req.query.limit) || 20, 100);
       const includeRead = req.query.includeRead === 'true';
       const since = req.query.since ? new Date(req.query.since as string) : undefined;
+      
+      // Support cursor-based pagination (preferred over offset)
+      const cursor = req.query.cursor as string | undefined;
+      // Legacy offset support (deprecated - warn in logs)
+      const offset = req.query.offset ? Number(req.query.offset) : undefined;
+      
+      if (offset !== undefined && offset > 0) {
+        logger.warn(`Deprecated: offset pagination used by user ${userId}. Migrate to cursor-based.`);
+      }
 
       // Use FanoutService to compute complete feed (personal + group notifications)
       const feed = await fanoutService.computeNotificationFeed(userId, {
         limit,
         includeRead,
+        cursor,
         ...(since && { since }),
+        ...(offset !== undefined && { offset }),
       });
 
       // Merge and sort personal and group notifications by createdAt
@@ -87,6 +98,8 @@ export default {
         notifications: items,
         total: feed.total,
         hasMore,
+        // Include nextCursor for cursor-based pagination
+        ...(feed.nextCursor && { nextCursor: feed.nextCursor }),
       });
     } catch (err) {
       logger.error('Error fetching notifications:', err);

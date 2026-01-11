@@ -17,6 +17,7 @@ import {
 } from '../events.schema';
 import { RedisCache } from '../config/redis';
 import UserPreferences from '../models/UserPreferences';
+import { idempotencyService, generateIdempotencyKey } from './IdempotencyService';
 
 export class EventHandlerService {
   private notificationService: NotificationService;
@@ -57,11 +58,19 @@ export class EventHandlerService {
   }
 
   async processNotificationEvent(eventData: any): Promise<boolean> {
+    // Extract or generate correlation ID for distributed tracing
+    const correlationId = eventData.correlationId || 
+                          eventData.traceId || 
+                          `evt_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+    
     const metadata: EventMetadata = {
       eventId: eventData.eventId || 'unknown',
       receivedAt: new Date(),
       source: 'message-queue',
       retryCount: eventData.retryCount || 0,
+      correlationId,
+      traceId: eventData.traceId,
+      spanId: eventData.spanId,
     };
 
     try {
@@ -69,56 +78,73 @@ export class EventHandlerService {
       const event = validateEvent(eventData);
       metadata.eventId = event.eventId;
 
-      logger.info(`📨 Processing ${event.eventType} event: ${event.eventId}`);
+      // Log with correlation ID for distributed tracing
+      logger.info(`📨 Processing ${event.eventType} event: ${event.eventId}`, {
+        correlationId,
+        eventType: event.eventType,
+        eventId: event.eventId,
+      });
 
       // Check for idempotency
       if (await this.isEventProcessed(event.eventId)) {
-        logger.info(`🔄 Event ${event.eventId} already processed, skipping`);
+        logger.info(`🔄 Event ${event.eventId} already processed, skipping`, { correlationId });
         return true;
       }
 
-      // Process the event based on type
-      const result = await this.handleEventByType(event);
+      // Process the event based on type, passing correlation ID
+      const result = await this.handleEventByType(event, correlationId);
       
       if (result.success) {
-        // Mark as processed for idempotency
-        await this.markEventProcessed(event.eventId, result.notificationId);
+        // Mark as processed for idempotency (with eventType for better tracing)
+        await this.markEventProcessed(event.eventId, result.notificationId, event.eventType);
         
-        // Publish processing success event
-        await this.publishEventProcessed(event, result);
+        // Publish processing success event with correlation ID
+        await this.publishEventProcessed(event, result, correlationId);
         
         metadata.processedAt = new Date();
-        logger.info(`✅ Successfully processed event ${event.eventId} -> notification ${result.notificationId}`);
+        logger.info(`✅ Successfully processed event ${event.eventId} -> notification ${result.notificationId}`, {
+          correlationId,
+          eventId: event.eventId,
+          notificationId: result.notificationId,
+          durationMs: Date.now() - metadata.receivedAt.getTime(),
+        });
       } else {
-        logger.error(`❌ Failed to process event ${event.eventId}: ${result.error}`);
+        logger.error(`❌ Failed to process event ${event.eventId}: ${result.error}`, {
+          correlationId,
+          error: result.error,
+        });
         metadata.errors = [result.error || 'Unknown error'];
       }
 
       return result.success;
 
     } catch (error) {
-      logger.error(`❌ Error processing event ${metadata.eventId}:`, error);
+      logger.error(`❌ Error processing event ${metadata.eventId}:`, {
+        correlationId,
+        error: error instanceof Error ? error.message : String(error),
+      });
       metadata.errors = [error instanceof Error ? error.message : String(error)];
       return false;
     }
   }
 
-  private async handleEventByType(event: NotificationEvent): Promise<EventProcessingResult> {
+  private async handleEventByType(event: NotificationEvent, correlationId?: string): Promise<EventProcessingResult> {
     try {
       if (isUserFollowedEvent(event)) {
-        return await this.handleUserFollowedEvent(event as any);
+        return await this.handleUserFollowedEvent(event as any, correlationId);
       } else if (isCommentCreatedEvent(event)) {
-        return await this.handleCommentCreatedEvent(event);
+        return await this.handleCommentCreatedEvent(event, correlationId);
       } else if (isMentionCreatedEvent(event)) {
-        return await this.handleMentionCreatedEvent(event);
+        return await this.handleMentionCreatedEvent(event, correlationId);
       } else if (isLikeCreatedEvent(event)) {
-        return await this.handleLikeCreatedEvent(event);
+        return await this.handleLikeCreatedEvent(event, correlationId);
       } else {
         return {
           success: false,
           eventId: (event as any)?.eventId || '',
           error: `Unknown event type: ${(event as any).eventType}`,
           retryable: false,
+          correlationId,
         };
       }
     } catch (error) {
@@ -127,12 +153,13 @@ export class EventHandlerService {
         eventId: (event as any)?.eventId || '',
         error: error instanceof Error ? error.message : String(error) || '',
         retryable: true,
+        correlationId,
       };
     }
   }
-  private async handleLikeCreatedEvent(event: LikeCreatedEvent): Promise<EventProcessingResult> {
+  private async handleLikeCreatedEvent(event: LikeCreatedEvent, correlationId?: string): Promise<EventProcessingResult> {
     try {
-      logger.info(`👍 Processing like created event: ${event.likerId} -> ${event.targetType} ${event.targetId}`);
+      logger.info(`👍 Processing like created event: ${event.likerId} -> ${event.targetType} ${event.targetId}`, { correlationId });
 
       // Check user preferences
       const shouldSend = await this.checkUserPreferences(event.targetOwnerId, 'like');
@@ -143,6 +170,7 @@ export class EventHandlerService {
           notificationId: 'skipped-by-preference',
           error: '',
           retryable: false,
+          correlationId,
         };
       }
 
@@ -165,6 +193,7 @@ export class EventHandlerService {
           originalEvent: event,
           eventId: event.eventId,
           resourceId: `${event.likerId}-${event.targetId}`, // For idempotency: unique per liker+target
+          correlationId,
         },
       };
 
@@ -176,6 +205,7 @@ export class EventHandlerService {
         notificationId: result.notificationId,
         error: result.status === 'success' ? '' : (result.message ? result.message : ''),
         retryable: result.status === 'failed',
+        correlationId,
       };
 
     } catch (error) {
@@ -184,13 +214,14 @@ export class EventHandlerService {
         eventId: event.eventId,
         error: error instanceof Error ? error.message : String(error),
         retryable: true,
+        correlationId,
       };
     }
   }
 
-  private async handleUserFollowedEvent(event: UserFollowedEvent): Promise<EventProcessingResult> {
+  private async handleUserFollowedEvent(event: UserFollowedEvent, correlationId?: string): Promise<EventProcessingResult> {
     try {
-      logger.info(`👥 Processing user followed event: ${event.followerId} -> ${event.followeeId}`);
+      logger.info(`👥 Processing user followed event: ${event.followerId} -> ${event.followeeId}`, { correlationId });
 
       // Check user preferences
       const shouldSend = await this.checkUserPreferences((event as any).followeeId, 'follow');
@@ -201,6 +232,7 @@ export class EventHandlerService {
           notificationId: 'skipped-by-preference',
           error: '',
           retryable: false,
+          correlationId,
         };
       }
 
@@ -221,6 +253,7 @@ export class EventHandlerService {
           originalEvent: event,
           eventId: (event as any).eventId,
           resourceId: (event as any).followerId, // For idempotency: unique per follower
+          correlationId,
         },
       };
 
@@ -232,6 +265,7 @@ export class EventHandlerService {
         notificationId: result.notificationId,
         error: result.status === 'success' ? '' : (result.message ? result.message : ''),
         retryable: result.status === 'failed',
+        correlationId,
       };
 
     } catch (error) {
@@ -240,13 +274,14 @@ export class EventHandlerService {
         eventId: (event as any)?.eventId || '',
         error: error instanceof Error ? error.message : String(error) || '',
         retryable: true,
+        correlationId,
       };
     }
   }
 
-  private async handleCommentCreatedEvent(event: CommentCreatedEvent): Promise<EventProcessingResult> {
+  private async handleCommentCreatedEvent(event: CommentCreatedEvent, correlationId?: string): Promise<EventProcessingResult> {
     try {
-      logger.info(`💬 Processing comment created event: ${event.commenterId} -> post ${event.postId}`);
+      logger.info(`💬 Processing comment created event: ${event.commenterId} -> post ${event.postId}`, { correlationId });
 
       // Check user preferences
       const shouldSend = await this.checkUserPreferences(event.postOwnerId, 'comment');
@@ -257,6 +292,7 @@ export class EventHandlerService {
           notificationId: 'skipped-by-preference',
           error: '',
           retryable: false,
+          correlationId,
         };
       }
 
@@ -278,6 +314,7 @@ export class EventHandlerService {
           originalEvent: event,
           eventId: event.eventId,
           resourceId: event.postId, // For idempotency: unique per comment on post
+          correlationId,
         },
       };
 
@@ -289,6 +326,7 @@ export class EventHandlerService {
         notificationId: result.notificationId,
         error: result.status === 'success' ? '' : (result.message ? result.message : ''),
         retryable: result.status === 'failed',
+        correlationId,
       };
 
     } catch (error) {
@@ -297,13 +335,14 @@ export class EventHandlerService {
         eventId: event.eventId,
         error: error instanceof Error ? error.message : String(error),
         retryable: true,
+        correlationId,
       };
     }
   }
 
-  private async handleMentionCreatedEvent(event: MentionCreatedEvent): Promise<EventProcessingResult> {
+  private async handleMentionCreatedEvent(event: MentionCreatedEvent, correlationId?: string): Promise<EventProcessingResult> {
     try {
-      logger.info(`🏷️ Processing mention created event: ${event.mentionerId} -> ${event.mentionedUserId}`);
+      logger.info(`🏷️ Processing mention created event: ${event.mentionerId} -> ${event.mentionedUserId}`, { correlationId });
       // Check user preferences
       const shouldSend = await this.checkUserPreferences(event.mentionedUserId, 'mention');
       if (!shouldSend) {
@@ -313,6 +352,7 @@ export class EventHandlerService {
           notificationId: 'skipped-by-preference',
           error: '',
           retryable: false,
+          correlationId,
         };
       }
       const notificationRequest = {
@@ -334,6 +374,7 @@ export class EventHandlerService {
           originalEvent: event,
           eventId: event.eventId,
           resourceId: event.contextId, // For idempotency: unique per mention context
+          correlationId,
         },
       };
 
@@ -345,6 +386,7 @@ export class EventHandlerService {
         notificationId: result.notificationId,
         error: result.status === 'success' ? '' : (result.message ? result.message : ''),
         retryable: result.status === 'failed',
+        correlationId,
       };
 
     } catch (error) {
@@ -353,6 +395,7 @@ export class EventHandlerService {
         eventId: event.eventId,
         error: error instanceof Error ? error.message : String(error),
         retryable: true,
+        correlationId,
       };
     }
   }
@@ -391,29 +434,26 @@ export class EventHandlerService {
 
   private async isEventProcessed(eventId: string): Promise<boolean> {
     try {
-      // Check Redis cache for processed events
-      const processed = await RedisCache.exists(`processed_event:${eventId}`);
-      return processed;
+      // Use the robust IdempotencyService with Redis + MongoDB fallback
+      const idempotencyKey = `event:${eventId}`;
+      return await idempotencyService.isProcessed(idempotencyKey);
     } catch (error) {
       logger.error('Error checking event processing status:', error);
+      // Fail-open: allow processing on error
       return false;
     }
   }
 
-  private async markEventProcessed(eventId: string, notificationId?: string): Promise<void> {
+  private async markEventProcessed(eventId: string, notificationId: string | undefined, eventType: string | undefined): Promise<void> {
     try {
-      const eventRecord = {
-        eventId,
-        notificationId,
-        processedAt: new Date().toISOString(),
-      };
+      const idempotencyKey = `event:${eventId}`;
       
-      // Store in Redis with 7-day expiry
-      await RedisCache.set(
-        `processed_event:${eventId}`,
-        JSON.stringify(eventRecord),
-        7 * 24 * 60 * 60 // 7 days in seconds
-      );
+      // Use the robust IdempotencyService with dual-write to Redis + MongoDB
+      await idempotencyService.markProcessed(idempotencyKey, {
+        eventId,
+        eventType: eventType || 'unknown',
+        ...(notificationId && { notificationId }),
+      });
       
       // Also add to in-memory cache for quick checks
       this.processedEvents.add(eventId);
@@ -422,7 +462,7 @@ export class EventHandlerService {
     }
   }
 
-  private async publishEventProcessed(event: NotificationEvent, result: EventProcessingResult): Promise<void> {
+  private async publishEventProcessed(event: NotificationEvent, result: EventProcessingResult, correlationId?: string): Promise<void> {
     try {
       const processedEvent = {
         eventType: 'notification.event.processed',
@@ -432,27 +472,30 @@ export class EventHandlerService {
         processedAt: new Date().toISOString(),
         success: result.success,
         error: result.error,
+        correlationId,
       };
 
       await MessageQueue.publish('notification.events.processed', processedEvent);
     } catch (error) {
-      logger.error('Error publishing event processed notification:', error);
+      logger.error('Error publishing event processed notification:', { correlationId, error });
     }
   }
 
   // Manual event processing for testing or replay
-  async processEvent(event: NotificationEvent): Promise<EventProcessingResult> {
-    logger.info(`🔄 Manually processing ${event.eventType} event: ${event.eventId}`);
+  async processEvent(event: NotificationEvent, correlationId?: string): Promise<EventProcessingResult> {
+    const traceId = correlationId || `manual_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+    logger.info(`🔄 Manually processing ${event.eventType} event: ${event.eventId}`, { correlationId: traceId });
     
     try {
       validateEvent(event);
-      return await this.handleEventByType(event);
+      return await this.handleEventByType(event, traceId);
     } catch (error) {
       return {
         success: false,
         eventId: event.eventId,
         error: error instanceof Error ? error.message : String(error),
         retryable: false,
+        correlationId: traceId,
       };
     }
   }

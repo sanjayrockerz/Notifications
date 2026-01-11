@@ -5,6 +5,11 @@ export interface BaseEvent {
   eventId: string; // UUID for idempotency
   timestamp: string; // ISO 8601 timestamp
   version: string; // Schema version for evolution
+  // Distributed tracing fields (allow undefined for exactOptionalPropertyTypes)
+  correlationId?: string | undefined; // Links related events across services (e.g., original HTTP request ID)
+  traceId?: string | undefined; // OpenTelemetry-compatible trace ID
+  spanId?: string | undefined; // OpenTelemetry-compatible span ID
+  source?: string | undefined; // Service that generated the event
 }
 
 // UserFollowed Event Schema
@@ -62,6 +67,11 @@ export const BaseEventSchema = z.object({
   eventId: z.string().uuid('Event ID must be a valid UUID'),
   timestamp: z.string().datetime('Timestamp must be a valid ISO 8601 string'),
   version: z.string().regex(/^v\d+$/, 'Version must be in format v1, v2, etc.'),
+  // Distributed tracing fields (optional for backward compatibility)
+  correlationId: z.string().optional(),
+  traceId: z.string().optional(),
+  spanId: z.string().optional(),
+  source: z.string().optional(),
 });
 
 export const UserFollowedEventSchema = BaseEventSchema.extend({
@@ -256,6 +266,10 @@ export interface EventMetadata {
   source: string;
   retryCount?: number;
   errors?: string[];
+  // Distributed tracing
+  correlationId?: string;
+  traceId?: string;
+  spanId?: string;
 }
 
 // Event processing result
@@ -265,6 +279,8 @@ export interface EventProcessingResult {
   notificationId?: string;
   error?: string;
   retryable: boolean;
+  // Include correlation for tracing (undefined allowed for exactOptionalPropertyTypes)
+  correlationId?: string | undefined;
 }
 
 // Export JSON Schema for external systems

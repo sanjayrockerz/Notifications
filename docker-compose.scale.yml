@@ -43,11 +43,12 @@ services:
       - notification-network
     restart: unless-stopped
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:3000/health"]
+      # Liveness check - only verifies process is alive
+      test: ["CMD", "curl", "-f", "http://localhost:3000/health/live"]
       interval: 30s
       timeout: 10s
       retries: 3
-      start_period: 40s
+      start_period: 60s
 
   api-2:
     build:
@@ -75,11 +76,12 @@ services:
       - notification-network
     restart: unless-stopped
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:3000/health"]
+      # Liveness check - only verifies process is alive
+      test: ["CMD", "curl", "-f", "http://localhost:3000/health/live"]
       interval: 30s
       timeout: 10s
       retries: 3
-      start_period: 40s
+      start_period: 60s
 
   # ═══════════════════════════════════════════════════════════
   # DELIVERY WORKERS (5x)

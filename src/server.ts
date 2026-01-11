@@ -12,6 +12,7 @@ import { initializeAPNs } from './config/apns';
 import { setupRoutes } from './routes';
 import { setupMiddleware } from './middleware';
 import { errorHandler } from './middleware/errorHandler';
+import { markInitializationComplete, markInitializationFailed } from './middleware/healthCheck';
 import { logger } from './utils/logger';
 import { NotificationService } from './services/NotificationService';
 import { SchedulerService } from './services/SchedulerService';
@@ -135,11 +136,17 @@ class NotificationServer {
   async start(): Promise<void> {
     try {
       await this.initialize();
+      
+      // Mark initialization complete for startup probe
+      markInitializationComplete();
 
       const server = this.app.listen(this.port, () => {
         logger.info(`🎯 Notification Service running on port ${this.port}`);
         logger.info(`📊 Environment: ${process.env.NODE_ENV || 'development'}`);
         logger.info(`🏥 Health check: http://localhost:${this.port}/health`);
+        logger.info(`🏥 Liveness: http://localhost:${this.port}/health/live`);
+        logger.info(`🏥 Readiness: http://localhost:${this.port}/health/ready`);
+        logger.info(`🏥 Startup: http://localhost:${this.port}/health/startup`);
       });
 
       // Graceful shutdown handling
@@ -165,6 +172,8 @@ class NotificationServer {
       process.on('SIGINT', () => shutdown('SIGINT'));
 
     } catch (error) {
+      // Mark initialization as failed for startup probe
+      markInitializationFailed(error instanceof Error ? error : new Error(String(error)));
       logger.error('❌ Failed to start server:', error);
       process.exit(1);
     }

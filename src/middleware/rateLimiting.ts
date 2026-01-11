@@ -3,6 +3,7 @@ import { RateLimiterRedis, RateLimiterMemory } from 'rate-limiter-flexible';
 import { getRedisClient } from '../config/redis';
 import { logger } from '../utils/logger';
 import { createError } from './errorHandler';
+import { redisCircuitBreaker, CircuitState } from '../utils/circuitBreaker';
 
 interface RateLimitConfig {
   windowMs: number;
@@ -85,7 +86,7 @@ export function initializeRateLimiters() {
   logger.info('Rate limiters initialized');
 }
 
-// Generic rate limiting middleware factory
+// Generic rate limiting middleware factory with circuit breaker
 function createRateLimitMiddleware(
   limiterName: string,
   keyGenerator?: (req: Request) => string
@@ -108,42 +109,77 @@ function createRateLimitMiddleware(
         key = req.ip || 'unknown';
       }
       
-      const result = await limiter.consume(key);
+      // Use circuit breaker for Redis operations
+      const { result, circuitOpen } = await redisCircuitBreaker.execute(
+        async () => limiter.consume(key),
+        // Fallback: allow request through (fail-open)
+        () => ({ remainingPoints: rateLimitConfigs[limiterName as keyof typeof rateLimitConfigs].max, msBeforeNext: 0, bypassed: true })
+      );
       
       // Add rate limit info to response headers
-      res.set({
-        'X-RateLimit-Limit': rateLimitConfigs[limiterName as keyof typeof rateLimitConfigs].max.toString(),
-        'X-RateLimit-Remaining': result.remainingPoints?.toString() || '0',
-        'X-RateLimit-Reset': new Date(Date.now() + result.msBeforeNext).toISOString(),
-      });
+      if (circuitOpen) {
+        // Indicate that rate limiting was bypassed due to Redis issues
+        res.set({
+          'X-RateLimit-Limit': rateLimitConfigs[limiterName as keyof typeof rateLimitConfigs].max.toString(),
+          'X-RateLimit-Remaining': 'N/A',
+          'X-RateLimit-Status': 'bypassed-fail-open',
+        });
+        logger.debug('Rate limiting bypassed (Redis circuit open)', {
+          limiter: limiterName,
+          key,
+          circuitState: redisCircuitBreaker.getState(),
+        });
+      } else {
+        res.set({
+          'X-RateLimit-Limit': rateLimitConfigs[limiterName as keyof typeof rateLimitConfigs].max.toString(),
+          'X-RateLimit-Remaining': result.remainingPoints?.toString() || '0',
+          'X-RateLimit-Reset': new Date(Date.now() + result.msBeforeNext).toISOString(),
+        });
+      }
       
       next();
       
     } catch (rejRes: any) {
-      // Rate limit exceeded
-      const secs = Math.round(rejRes.msBeforeNext / 1000) || 1;
+      // Check if this is a rate limit exceeded error or a Redis error
+      if (rejRes.remainingPoints !== undefined) {
+        // Rate limit exceeded
+        const secs = Math.round(rejRes.msBeforeNext / 1000) || 1;
+        
+        res.set({
+          'Retry-After': String(secs),
+          'X-RateLimit-Limit': rateLimitConfigs[limiterName as keyof typeof rateLimitConfigs].max.toString(),
+          'X-RateLimit-Remaining': '0',
+          'X-RateLimit-Reset': new Date(Date.now() + rejRes.msBeforeNext).toISOString(),
+        });
+        
+        logger.warn('Rate limit exceeded', {
+          limiter: limiterName,
+          key: req.ip,
+          remainingPoints: rejRes.remainingPoints,
+          msBeforeNext: rejRes.msBeforeNext,
+          url: req.url,
+          method: req.method,
+        });
+        
+        const error = createError.tooManyRequests(
+          `Rate limit exceeded. Try again in ${secs} seconds.`
+        );
+        
+        return next(error);
+      }
+      
+      // Redis error - fail open (allow request through)
+      logger.warn('Rate limiting failed due to Redis error - allowing request (fail-open)', {
+        limiter: limiterName,
+        error: rejRes.message || String(rejRes),
+        circuitState: redisCircuitBreaker.getState(),
+      });
       
       res.set({
-        'Retry-After': String(secs),
-        'X-RateLimit-Limit': rateLimitConfigs[limiterName as keyof typeof rateLimitConfigs].max.toString(),
-        'X-RateLimit-Remaining': '0',
-        'X-RateLimit-Reset': new Date(Date.now() + rejRes.msBeforeNext).toISOString(),
+        'X-RateLimit-Status': 'error-fail-open',
       });
       
-      logger.warn('Rate limit exceeded', {
-        limiter: limiterName,
-        key: req.ip,
-        remainingPoints: rejRes.remainingPoints,
-        msBeforeNext: rejRes.msBeforeNext,
-        url: req.url,
-        method: req.method,
-      });
-      
-      const error = createError.tooManyRequests(
-        `Rate limit exceeded. Try again in ${secs} seconds.`
-      );
-      
-      next(error);
+      next();
     }
   };
 }
@@ -247,4 +283,25 @@ export async function resetRateLimit(limiterName: string, key: string): Promise<
     logger.error('Error resetting rate limit:', error);
     return false;
   }
+}
+
+/**
+ * Get circuit breaker status for rate limiting
+ * Used for monitoring and health checks
+ */
+export function getRateLimitCircuitStatus() {
+  const stats = redisCircuitBreaker.getStats();
+  return {
+    state: stats.state,
+    isOpen: stats.state === CircuitState.OPEN,
+    isHalfOpen: stats.state === CircuitState.HALF_OPEN,
+    failOpen: true, // Document that we fail-open
+    consecutiveFailures: stats.failures,
+    totalFailures: stats.totalFailures,
+    totalSuccesses: stats.totalSuccesses,
+    circuitOpenCount: stats.circuitOpenCount,
+    lastFailure: stats.lastFailure,
+    lastSuccess: stats.lastSuccess,
+    behavior: 'fail-open: requests allowed when Redis is unavailable',
+  };
 }
